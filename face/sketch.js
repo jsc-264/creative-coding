@@ -43,4 +43,10 @@ function draw() {
     eyes: color(87, 151, 212),
     lips: color(179, 34, 94)
   })
+
+  drawFace(500, 100, 75, {
+    skin: color(87, 204, 91),
+    eyes: color(185, 3, 100),
+    lips: color(50, 5, 255)
+  })
 }
