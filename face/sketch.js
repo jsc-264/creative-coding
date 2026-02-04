@@ -30,9 +30,17 @@ function drawFace(x, y, d, cols) {
   pop()
 }
 
+let faceCoords = []
+let randomCols
+
 function setup() {
   createCanvas(600, 600);
   rectMode(CENTER)
+  randomCols = {
+    skin: color(random(255), random(255), random(255)),
+    eyes: color(random(255), random(255), random(255)),
+    lips: color(random(255), random(255), random(255))
+  }
 }
 
 function draw() {
@@ -49,4 +57,7 @@ function draw() {
     eyes: color(185, 3, 100),
     lips: color(50, 5, 255)
   })
+
+  drawFace(450, 450, 150, randomCols)
+
 }
