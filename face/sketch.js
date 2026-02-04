@@ -1,14 +1,26 @@
 function drawFace(x, y, d, cols) {
   push()
   translate(x, y)
+  noStroke()
 
   fill(cols.skin)
   circle(0, 0, d) // head
 
   fill(cols.eyes)
+
   circle(-d / 5, -d / 5, d / 5) // left eye
+  push()
+  stroke(0)
+  strokeWeight(d/50)
   point(-d / 5, -d / 5, d / 5)
+  pop()
+
   circle(d / 5, -d / 5, d / 5) // right eye
+  push()
+  stroke(0)
+  strokeWeight(d / 50)
+  point(d / 5, -d / 5, d / 5)
+  pop()
 
   stroke(cols.lips)
   strokeWeight(d/50)
@@ -23,7 +35,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(128);
 
   drawFace(200, 300, 200, {
     skin: color(237, 193, 59),
