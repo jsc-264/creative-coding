@@ -1,4 +1,4 @@
-const DIM = 4
+const DIM = 3
 let tileSize
 
 function setup() {
@@ -13,8 +13,11 @@ function draw() {
 
   for (let i = 0; i < DIM; i++) {
     for (let j = 0; j < DIM; j++) {
-      noFill()
-      square(tileSize * i + tileSize/2, tileSize * j + tileSize/2, tileSize * 0.9)
+      const strokeThickness = map(mouseX, 0, width, 0, tileSize * 0.5)
+      strokeWeight(strokeThickness)
+      stroke(100, 10, 250, 120)
+      fill(200, 0, 100)
+      circle(tileSize * i + tileSize/2, tileSize * j + tileSize/2, tileSize * 0.5)
     }
   }
 }
