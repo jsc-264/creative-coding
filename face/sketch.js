@@ -1,5 +1,6 @@
 function drawFace(x, y, d, cols) {
   const space = 5
+
   push()
   translate(x, y)
   noStroke()
@@ -26,6 +27,9 @@ function drawFace(x, y, d, cols) {
   stroke(cols.lips)
   strokeWeight(d/(space * 10))
   noFill()
+  if (frameCount % 60 < 30){
+    fill(cols.lips)
+  }
   arc(0, d / (space * 2), 2 * d / space, 2 * d / space, 0, -PI) // smile
   pop()
 }
