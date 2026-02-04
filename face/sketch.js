@@ -1,4 +1,5 @@
 function drawFace(x, y, d, cols) {
+  const space = 5
   push()
   translate(x, y)
   noStroke()
@@ -8,24 +9,24 @@ function drawFace(x, y, d, cols) {
 
   fill(cols.eyes)
 
-  circle(-d / 5, -d / 5, d / 5) // left eye
+  circle(-d / space, -d / space, d / space) // left eye
   push()
   stroke(0)
   strokeWeight(d/50)
-  point(-d / 5, -d / 5, d / 5)
+  point(-d / space, -d / space, d / space)
   pop()
 
-  circle(d / 5, -d / 5, d / 5) // right eye
+  circle(d / space, -d / space, d / space) // right eye
   push()
   stroke(0)
   strokeWeight(d / 50)
-  point(d / 5, -d / 5, d / 5)
+  point(d / space, -d / space, d / space)
   pop()
 
   stroke(cols.lips)
-  strokeWeight(d/50)
+  strokeWeight(d/(space * 10))
   noFill()
-  arc( 0, d / 10, 2 * d / 5, 2*d / 5, 0, -PI) // smile
+  arc(0, d / (space * 2), 2 * d / space, 2 * d / space, 0, -PI) // smile
   pop()
 }
 
