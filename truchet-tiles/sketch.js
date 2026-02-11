@@ -30,4 +30,10 @@ function setup() {
 
 function draw() {
   background(220);
+
+  for (let i = 0; i < DIM; i++) {
+    for (let j = 0; j < DIM; j++) {
+      image(tiles[i][j], tileSize * i + tileSize / 2, tileSize * j + tileSize / 2, tileSize, tileSize)
+    }
+  }
 }
