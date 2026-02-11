@@ -14,7 +14,7 @@ function preload() {
 function setup() {
   createCanvas(500, 500);
   rectMode(CENTER)
-  // frameRate(5)
+  frameRate(0.5)
 
   tileSize = width / DIM
 
@@ -24,16 +24,16 @@ function setup() {
     tiles[i] = new Array(DIM).fill(0)
   }
 
+}
+
+function draw() {
+  background(220);
+  
   for (let i = 0; i < DIM; i++) {
     for (let j = 0; j < DIM; j++) {
       tiles[i][j] = random(tileImages)
     }
   }
-
-  background(220);
-}
-
-function draw() {
 
   for (let i = 0; i < DIM; i++) {
     for (let j = 0; j < DIM; j++) {
