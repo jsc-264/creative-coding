@@ -12,7 +12,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(500, 500);
   rectMode(CENTER)
   // frameRate(5)
 
