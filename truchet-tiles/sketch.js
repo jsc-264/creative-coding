@@ -1,6 +1,8 @@
 let tileImages
 let tiles;
 const DIM = 10
+let i = 0
+let j = 0
 
 function preload() {
   tileImages = [
@@ -12,6 +14,7 @@ function preload() {
 function setup() {
   createCanvas(400, 400);
   rectMode(CENTER)
+  // frameRate(5)
 
   tileSize = width / DIM
 
@@ -21,19 +24,31 @@ function setup() {
     tiles[i] = new Array(DIM).fill(0)
   }
 
-  for (let i = 0; i < DIM; i++) {
-    for (let j = 0; j < DIM; j++) {
-      tiles[i][j] = random(tileImages)
-    }
-  }
+  // for (let i = 0; i < DIM; i++) {
+  //   for (let j = 0; j < DIM; j++) {
+  //     tiles[i][j] = random(tileImages)
+  //   }
+  // }
+
+  background(220);
 }
 
 function draw() {
-  background(220);
 
-  for (let i = 0; i < DIM; i++) {
-    for (let j = 0; j < DIM; j++) {
-      image(tiles[i][j], tileSize * i + tileSize / 2, tileSize * j + tileSize / 2, tileSize, tileSize)
-    }
+  const tile = random(tileImages)
+  tiles[i][j] = tile
+
+  image(tiles[i][j], tileSize * i, tileSize * j, tileSize, tileSize)
+
+  i++
+
+  if (i > DIM - 1) {
+    i = 0
+    j++
+  }
+
+  if (j > DIM - 1) {
+    noLoop()
+    print("done")
   }
 }
