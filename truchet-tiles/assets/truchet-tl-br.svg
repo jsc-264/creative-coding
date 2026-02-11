@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+    "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+	 width="320px" height="320px">
+	
+	<polyline points="0,0,319,0,319,319,0,319,0,0" stroke="black" stroke-width="5" stroke-linejoin="round" fill-opacity="0" />
+	<circle cx="0" cy="0" r="160" stroke="black" stroke-width="16" stroke-linejoin="round" fill-opacity="0" />
+	<circle cx="319" cy="319" r="160" stroke="black" stroke-width="16" stroke-linejoin="round" fill-opacity="0" />
+
+</svg>
+
+
