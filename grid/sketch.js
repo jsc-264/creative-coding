@@ -19,11 +19,14 @@ function draw() {
 
       let hue = map(i, 0, DIM, 0, 360)
       let brg = map(j, 0, DIM, 10, 90)
-      const d = dist(mouseX, mouseY, x, y)
 
-      if (d < rad){
-        // hue = (hue + 180) % 360
-        brg = map(d, 0, rad, 100, brg)
+      if (mouseIsPressed) {
+        const d = dist(mouseX, mouseY, x, y)
+
+        if (d < rad) {
+          // hue = (hue + 180) % 360
+          brg = map(d, 0, rad, 100, brg)
+        }
       }
 
       // if (d < rad){
