@@ -34,7 +34,6 @@ function setup() {
 }
 
 function draw() {
-
   const tile = random(tileImages)
   tiles[i][j] = tile
 
@@ -47,8 +46,8 @@ function draw() {
     j++
   }
 
-  if (j > DIM - 1) {
-    noLoop()
-    print("done")
+  if (j > DIM) {
+    j = 0
+    background(220)
   }
 }
