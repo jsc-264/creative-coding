@@ -24,30 +24,37 @@ function setup() {
     tiles[i] = new Array(DIM).fill(0)
   }
 
-  // for (let i = 0; i < DIM; i++) {
-  //   for (let j = 0; j < DIM; j++) {
-  //     tiles[i][j] = random(tileImages)
-  //   }
-  // }
+  for (let i = 0; i < DIM; i++) {
+    for (let j = 0; j < DIM; j++) {
+      tiles[i][j] = random(tileImages)
+    }
+  }
 
   background(220);
 }
 
 function draw() {
-  const tile = random(tileImages)
-  tiles[i][j] = tile
 
-  image(tiles[i][j], tileSize * i, tileSize * j, tileSize, tileSize)
-
-  i++
-
-  if (i > DIM - 1) {
-    i = 0
-    j++
+  for (let i = 0; i < DIM; i++) {
+    for (let j = 0; j < DIM; j++) {
+      image(tiles[i][j], tileSize * i, tileSize * j, tileSize, tileSize)
+    }
   }
 
-  if (j > DIM) {
-    j = 0
-    background(220)
-  }
+  // const tile = random(tileImages)
+  // tiles[i][j] = tile
+
+  // image(tiles[i][j], tileSize * i, tileSize * j, tileSize, tileSize)
+
+  // i++
+
+  // if (i > DIM - 1) {
+  //   i = 0
+  //   j++
+  // }
+
+  // if (j > DIM) {
+  //   j = 0
+  //   background(220)
+  // }
 }
