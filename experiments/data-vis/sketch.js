@@ -1,4 +1,4 @@
-const DIMENSION = 50
+const DIMENSION = 10
 let currentGen
 let tileSize
 
@@ -8,7 +8,7 @@ const ALIVE = 1
 
 function setup() {
   createCanvas(400, 400);
-  textAlign(CENTER, CENTER)
+  frameRate(10)
   tileSize = width / DIMENSION
 
   // initialise tile grid

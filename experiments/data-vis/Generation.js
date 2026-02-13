@@ -30,7 +30,10 @@ class Generation {
                 const TILE_DRAW_X = CURRENT_TILE.index.x * tileSize
                 const TILE_DRAW_Y = CURRENT_TILE.index.y * tileSize
 
-                if (CURRENT_TILE.state == ALIVE) {
+                const CURRENT_TILE_ALIVE = CURRENT_TILE.state == ALIVE
+
+
+                if (CURRENT_TILE_ALIVE) {
                     fill(255)
                 } else {
                     fill(0)
