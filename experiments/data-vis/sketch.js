@@ -20,6 +20,7 @@ function draw() {
   background(220);
 
   currentGen.display()
+
   const nextGen = currentGen.evolve()
   currentGen = nextGen
 }

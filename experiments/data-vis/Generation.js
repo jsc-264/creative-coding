@@ -8,6 +8,9 @@ class Generation {
     }
 
     fill(state) {
+        // fills generation grid with tiles,
+        // if state is stated, all tiles have that state.
+        // Otherwise, state is random.
         for (let j = 0; j < this.size; j++) {
             for (let i = 0; i < this.size; i++) {
                 if (state != undefined) {
@@ -20,6 +23,7 @@ class Generation {
     }
 
     display() {
+        // displays generation as a NxN grid on canvas
         const tileSize = width / this.size
 
         for (let j = 0; j < this.size; j++) {
@@ -46,6 +50,7 @@ class Generation {
     }
 
     countAliveNeighbours(currentTile) {
+        // counts number of neighbours that have alive state
         const CURRENT_TILE_INDEX_X = currentTile.index.x
         const CURRENT_TILE_INDEX_Y = currentTile.index.y
 
@@ -75,6 +80,7 @@ class Generation {
     }
 
     evolve() {
+        // creates new generation based off rules and prev gen
         const newGen = new Generation(this.size)
         newGen.fill(NO_STATE)
 
@@ -87,19 +93,19 @@ class Generation {
                 const CURRENT_TILE_DEAD = CURRENT_TILE.state == DEAD
 
                 // rules go here
-                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS < 2) {
+                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS < 2) { // underpopulation
                     newGen.grid[i][j] = new Tile(i, j, DEAD)
                 }
 
-                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS >= 2 && ALIVE_NEIGHBOURS <= 3) {
+                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS >= 2 && ALIVE_NEIGHBOURS <= 3) { // next generation
                     newGen.grid[i][j] = new Tile(i, j, ALIVE)
                 }
 
-                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS > 3) {
+                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS > 3) { // overpopulation
                     newGen.grid[i][j] = new Tile(i, j, DEAD)
                 }
 
-                if (CURRENT_TILE_DEAD && ALIVE_NEIGHBOURS == 3) {
+                if (CURRENT_TILE_DEAD && ALIVE_NEIGHBOURS == 3) { // reproduction
                     newGen.grid[i][j] = new Tile(i, j, ALIVE)
                 }
             }
