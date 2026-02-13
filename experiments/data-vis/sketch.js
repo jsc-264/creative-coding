@@ -12,17 +12,17 @@ function setup() {
   tileSize = width / DIMENSION
 
   // initialise tile grid
-  currentGen = new Grid(DIMENSION)
+  currentGen = new Generation(DIMENSION)
   currentGen.fill()
-
-  console.log(currentGen.grid)
 }
 
 function draw() {
   background(220);
 
   currentGen.display()
+}
 
-  // const nextGen = currentGen.evolve()
-  noLoop()
+function mouseClicked(){
+  const nextGen = currentGen.evolve()
+  currentGen = nextGen
 }

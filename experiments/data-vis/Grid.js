@@ -1,4 +1,4 @@
-class Grid {
+class Generation {
     constructor(size) {
         this.size = size
         this.grid = new Array(size)
@@ -7,10 +7,14 @@ class Grid {
         }
     }
 
-    fill() {
+    fill(state) {
         for (let j = 0; j < this.size; j++) {
             for (let i = 0; i < this.size; i++) {
-                this.grid[i][j] = new Tile(i, j)
+                if (state != undefined) {
+                    this.grid[i][j] = new Tile(i, j, state)
+                } else {
+                    this.grid[i][j] = new Tile(i, j)
+                }
             }
         }
     }
@@ -49,8 +53,8 @@ class Grid {
 
         let aliveNeighbours = 0
         for (let j = -1; j <= 1; j++) {
-            for(let i = -1; i <= 1; i++) {
-                if (CURRENT_TILE_INDEX_X+i < 0 || CURRENT_TILE_INDEX_X+i >= this.size){
+            for (let i = -1; i <= 1; i++) {
+                if (CURRENT_TILE_INDEX_X + i < 0 || CURRENT_TILE_INDEX_X + i >= this.size) {
                     continue
                 }
 
@@ -58,16 +62,28 @@ class Grid {
                     continue
                 }
 
-                if (i == 0 && j == 0){
+                if (i == 0 && j == 0) {
                     continue
                 }
 
-                if (this.grid[CURRENT_TILE_INDEX_X+i][CURRENT_TILE_INDEX_Y+j].state == ALIVE){
+                if (this.grid[CURRENT_TILE_INDEX_X + i][CURRENT_TILE_INDEX_Y + j].state == ALIVE) {
                     aliveNeighbours++
                 }
             }
         }
 
         return aliveNeighbours
+    }
+
+    evolve() {
+        const newGen = new Generation(this.size)
+        newGen.fill(0)
+        console.log(newGen)
+
+        // TODO: 
+            // create evolve method
+
+
+        return newGen
     }
 }
