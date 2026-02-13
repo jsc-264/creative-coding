@@ -1,18 +1,23 @@
 const DIMENSION = 10
-let tileStates
+let tileGrid
 let tileSize
 
 function setup() {
   createCanvas(400, 400);
   tileSize = width / DIMENSION
 
-  // initialise grid
-  tileStates = new Array(DIMENSION)
+  // initialise tile grid
+  tileGrid = new Array(DIMENSION)
   for (let i = 0; i < DIMENSION; i++){
-    tileStates[i] = new Array(DIMENSION)
+    tileGrid[i] = new Array(DIMENSION)
   }
 
-  print(tileStates)
+  // fill tile grid
+  for (let i = 0; i < DIMENSION; i++) {
+    for(let j = 0; j < DIMENSION; j++) {
+      tileGrid[i][j] = 0
+    }
+  }
 }
 
 function draw() {
