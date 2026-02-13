@@ -22,9 +22,12 @@ class Generation {
     display() {
         const tileSize = width / this.size
 
+        console.log(this.grid)
+
         for (let j = 0; j < this.size; j++) {
             for (let i = 0; i < this.size; i++) {
                 const CURRENT_TILE = this.grid[i][j]
+
 
                 const TILE_DRAW_X = CURRENT_TILE.index.x * tileSize
                 const TILE_DRAW_Y = CURRENT_TILE.index.y * tileSize
@@ -77,11 +80,19 @@ class Generation {
 
     evolve() {
         const newGen = new Generation(this.size)
-        newGen.fill(0)
-        console.log(newGen)
+        newGen.fill(NO_STATE)
 
-        // TODO: 
-            // create evolve method
+        for (let j = 0; j < DIMENSION; j++) {
+            for (let i = 0; i < DIMENSION; i++) {
+                const CURRENT_TILE = this.grid[i][j]
+                const ALIVE_NEIGHTBOURS = this.countAliveNeighbours(CURRENT_TILE)
+                
+                const CURRENT_TILE_ALIVE = CURRENT_TILE.state == ALIVE
+                const CURRENT_TILE_DEAD = CURRENT_TILE.state == DEAD
+            
+                // rules go here
+            }
+        }
 
 
         return newGen
