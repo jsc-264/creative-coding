@@ -43,11 +43,31 @@ class Grid {
     }
 
     countAliveNeighbours(currentTile) {
-        const indexX = currentTile.index.x
-        const indexY = currentTile.index.y
-        
+        const CURRENT_TILE_INDEX_X = currentTile.index.x
+        const CURRENT_TILE_INDEX_Y = currentTile.index.y
 
-        return currentTile.state
 
+        let aliveNeighbours = 0
+        for (let j = -1; j <= 1; j++) {
+            for(let i = -1; i <= 1; i++) {
+                if (CURRENT_TILE_INDEX_X+i < 0 || CURRENT_TILE_INDEX_X+i >= this.size){
+                    continue
+                }
+
+                if (CURRENT_TILE_INDEX_Y + j < 0 || CURRENT_TILE_INDEX_Y + j >= this.size) {
+                    continue
+                }
+
+                if (i == 0 && j == 0){
+                    continue
+                }
+
+                if (this.grid[CURRENT_TILE_INDEX_X+i][CURRENT_TILE_INDEX_Y+j].state == ALIVE){
+                    aliveNeighbours++
+                }
+            }
+        }
+
+        return aliveNeighbours
     }
 }
