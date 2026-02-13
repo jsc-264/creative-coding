@@ -19,13 +19,19 @@ class Grid {
         const tileSize = width / this.size
 
         for (let i = 0; i < this.size; i++) {
-            for(let j = 0; j < this.size; j++) {
-                const currentTile = this.grid[i][j]
+            for (let j = 0; j < this.size; j++) {
+                const CURRENT_TILE = this.grid[i][j]
 
-                const x = currentTile.index.x * tileSize
-                const y = currentTile.index.y * tileSize
+                const TILE_DRAW_X = CURRENT_TILE.index.x * tileSize
+                const TILE_DRAW_Y = CURRENT_TILE.index.y * tileSize
 
-                rect(x, y, tileSize)
+                if (CURRENT_TILE.state == ALIVE){
+                    fill(0)
+                } else {
+                    fill(255)
+                }
+
+                rect(TILE_DRAW_X, TILE_DRAW_Y, tileSize)
             }
         }
     }
