@@ -11,6 +11,13 @@ function newGrid(size = DIMENSION){
     grid[i] = new Array(size)
   }
 
+  // fill tile grid
+  for (let i = 0; i < DIMENSION; i++) {
+    for (let j = 0; j < DIMENSION; j++) {
+      grid[i][j] = new Tile(i, j)
+    }
+  }
+
   return grid
 }
 
@@ -20,13 +27,6 @@ function setup() {
 
   // initialise tile grid
   currentGrid = newGrid()
-
-  // fill tile grid
-  for (let i = 0; i < DIMENSION; i++) {
-    for(let j = 0; j < DIMENSION; j++) {
-      currentGrid[i][j] = round(random(1))
-    }
-  }
 }
 
 function draw() {
@@ -39,7 +39,7 @@ function draw() {
       const y = j * tileSize
 
       const CURRENT_TILE = currentGrid[i][j]
-      if (CURRENT_TILE == DEAD){
+      if (CURRENT_TILE.state == DEAD){
         fill(0)
       } else {
         fill(255)
