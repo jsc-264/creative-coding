@@ -1,5 +1,5 @@
 const DIMENSION = 20
-let tileGrid
+let currentGrid
 let tileSize
 
 const DEAD = 0
@@ -19,12 +19,12 @@ function setup() {
   tileSize = width / DIMENSION
 
   // initialise tile grid
-  tileGrid = newGrid()
+  currentGrid = newGrid()
 
   // fill tile grid
   for (let i = 0; i < DIMENSION; i++) {
     for(let j = 0; j < DIMENSION; j++) {
-      tileGrid[i][j] = round(random(1))
+      currentGrid[i][j] = round(random(1))
     }
   }
 }
@@ -38,8 +38,8 @@ function draw() {
       const x = i * tileSize
       const y = j * tileSize
 
-      const CURRENT_TILE_STATE = tileGrid[i][j]
-      if (CURRENT_TILE_STATE == DEAD){
+      const CURRENT_TILE = currentGrid[i][j]
+      if (CURRENT_TILE == DEAD){
         fill(0)
       } else {
         fill(255)
