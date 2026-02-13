@@ -1,23 +1,29 @@
-const DIMENSION = 10
+const DIMENSION = 20
 let tileGrid
 let tileSize
 
 const DEAD = 0
+
+function newGrid(size = DIMENSION){
+  let grid = new Array(size)
+  for (let i = 0; i < DIMENSION; i++) {
+    grid[i] = new Array(size)
+  }
+
+  return grid
+}
 
 function setup() {
   createCanvas(400, 400);
   tileSize = width / DIMENSION
 
   // initialise tile grid
-  tileGrid = new Array(DIMENSION)
-  for (let i = 0; i < DIMENSION; i++){
-    tileGrid[i] = new Array(DIMENSION)
-  }
+  tileGrid = newGrid()
 
   // fill tile grid
   for (let i = 0; i < DIMENSION; i++) {
     for(let j = 0; j < DIMENSION; j++) {
-      tileGrid[i][j] = 0
+      tileGrid[i][j] = round(random(1))
     }
   }
 }
