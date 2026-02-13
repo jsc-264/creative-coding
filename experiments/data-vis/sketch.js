@@ -7,6 +7,8 @@ const ALIVE = 1// fill tile grid
 
 function setup() {
   createCanvas(400, 400);
+  textAlign(CENTER, CENTER)
+  randomSeed(1)
   tileSize = width / DIMENSION
 
   // initialise tile grid
@@ -20,4 +22,7 @@ function draw() {
   background(220);
 
   currentGen.display()
+
+  // const nextGen = currentGen.evolve()
+  noLoop()
 }

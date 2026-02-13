@@ -1,6 +1,10 @@
 class Tile {
-    constructor(x, y){
+    constructor(x, y, state) {
         this.index = createVector(x, y)
-        this.state = random([DEAD, ALIVE])
+        if (state) {
+            this.state = state
+        } else {
+            this.state = random([DEAD, ALIVE])
+        }
     }
 }
