@@ -5,6 +5,7 @@ let tileSize
 const DEAD = 0
 
 function newGrid(size = DIMENSION){
+  // returns new empty grid
   let grid = new Array(size)
   for (let i = 0; i < DIMENSION; i++) {
     grid[i] = new Array(size)
