@@ -22,8 +22,6 @@ class Generation {
     display() {
         const tileSize = width / this.size
 
-        console.log(this.grid)
-
         for (let j = 0; j < this.size; j++) {
             for (let i = 0; i < this.size; i++) {
                 const CURRENT_TILE = this.grid[i][j]
@@ -34,17 +32,12 @@ class Generation {
 
                 if (CURRENT_TILE.state == ALIVE) {
                     fill(255)
-                    stroke(0)
                 } else {
                     fill(0)
-                    stroke(255)
                 }
 
+                noStroke()
                 rect(TILE_DRAW_X, TILE_DRAW_Y, tileSize)
-
-                textSize(16)
-                const a = this.countAliveNeighbours(CURRENT_TILE)
-                text(a, TILE_DRAW_X + tileSize / 2, TILE_DRAW_Y + tileSize / 2)
             }
         }
     }
@@ -85,12 +78,27 @@ class Generation {
         for (let j = 0; j < DIMENSION; j++) {
             for (let i = 0; i < DIMENSION; i++) {
                 const CURRENT_TILE = this.grid[i][j]
-                const ALIVE_NEIGHTBOURS = this.countAliveNeighbours(CURRENT_TILE)
-                
+                const ALIVE_NEIGHBOURS = this.countAliveNeighbours(CURRENT_TILE)
+
                 const CURRENT_TILE_ALIVE = CURRENT_TILE.state == ALIVE
                 const CURRENT_TILE_DEAD = CURRENT_TILE.state == DEAD
-            
+
                 // rules go here
+                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS < 2) {
+                    newGen.grid[i][j] = new Tile(i, j, DEAD)
+                }
+
+                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS >= 2 && ALIVE_NEIGHBOURS <= 3) {
+                    newGen.grid[i][j] = new Tile(i, j, ALIVE)
+                }
+
+                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS > 3) {
+                    newGen.grid[i][j] = new Tile(i, j, DEAD)
+                }
+
+                if (CURRENT_TILE_DEAD && ALIVE_NEIGHBOURS == 3) {
+                    newGen.grid[i][j] = new Tile(i, j, ALIVE)
+                }
             }
         }
 
