@@ -40,7 +40,8 @@ class Generation {
                 if (CURRENT_TILE_ALIVE) {
                     fill(255)
                 } else {
-                    fill(0)
+                    const col = map(CURRENT_TILE.index.x, 0, this.size-1, 0, 360)
+                    fill(col, 100, 10)
                 }
 
                 noStroke()
