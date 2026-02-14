@@ -22,7 +22,7 @@ class Generation {
         }
     }
 
-    display() {
+    display(col) {
         // displays generation as a NxN grid on canvas
         const tileSize = width / this.size
 
@@ -40,8 +40,7 @@ class Generation {
                 if (CURRENT_TILE_ALIVE) {
                     fill(255)
                 } else {
-                    const col = map(CURRENT_TILE.index.x, 0, this.size-1, 0, 360)
-                    fill(col, 100, 10)
+                    fill(col)
                 }
 
                 noStroke()
