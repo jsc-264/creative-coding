@@ -1,4 +1,5 @@
-const DIMENSION = 10
+const DIMENSION = 100
+const RADIUS = 200
 let currentGen
 let tileSize
 
@@ -23,4 +24,8 @@ function draw() {
 
   const nextGen = currentGen.evolve()
   currentGen = nextGen
+}
+
+function mouseClicked(){
+  currentGen.revive(RADIUS)
 }

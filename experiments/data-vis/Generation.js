@@ -114,4 +114,19 @@ class Generation {
 
         return newGen
     }
+
+    revive(rad){
+        for (let j = 0; j < DIMENSION; j++) {
+            for (let i = 0; i < DIMENSION; i++) {
+                const CURRENT_TILE = this.grid[i][j]
+                const TILE_DRAW_X = CURRENT_TILE.index.x * tileSize
+                const TILE_DRAW_Y = CURRENT_TILE.index.y * tileSize
+                const d = dist(TILE_DRAW_X, TILE_DRAW_Y, mouseX, mouseY)
+
+                if (d < rad && random(1) < 0.3){
+                    CURRENT_TILE.state = ALIVE
+                }
+            }
+        }
+    }
 }
