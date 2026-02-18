@@ -59,13 +59,15 @@ class Generation {
         let aliveNeighbours = 0
         for (let j = -1; j <= 1; j++) {
             for (let i = -1; i <= 1; i++) {
+                const NEIGHBOUR_TILE_INDEX_X = CURRENT_TILE_INDEX_X + i
+                const NEIGHBOUR_TILE_INDEX_Y = CURRENT_TILE_INDEX_Y + j
 
                 // check if neighbour is out of bounds of grid
-                if (CURRENT_TILE_INDEX_X + i < 0 || CURRENT_TILE_INDEX_X + i >= this.size) {
+                if (NEIGHBOUR_TILE_INDEX_X < 0 || NEIGHBOUR_TILE_INDEX_X >= this.size) {
                     continue
                 }
 
-                if (CURRENT_TILE_INDEX_Y + j < 0 || CURRENT_TILE_INDEX_Y + j >= this.size) {
+                if (NEIGHBOUR_TILE_INDEX_Y < 0 || NEIGHBOUR_TILE_INDEX_Y >= this.size) {
                     continue
                 }
 
@@ -75,7 +77,7 @@ class Generation {
                 }
 
                 // is current neighbour alive?
-                const CURRENT_NEIGHBOUR = this.grid[CURRENT_TILE_INDEX_X + i][CURRENT_TILE_INDEX_Y + j]
+                const CURRENT_NEIGHBOUR = this.grid[NEIGHBOUR_TILE_INDEX_X][NEIGHBOUR_TILE_INDEX_Y]
                 if (CURRENT_NEIGHBOUR.state == ALIVE) {
                     aliveNeighbours++
                 }
