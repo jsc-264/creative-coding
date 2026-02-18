@@ -31,12 +31,13 @@ class Generation {
                 const CURRENT_TILE = this.grid[i][j]
 
 
+                // gets location to draw each tile
                 const TILE_DRAW_X = CURRENT_TILE.index.x * tileSize
                 const TILE_DRAW_Y = CURRENT_TILE.index.y * tileSize
 
                 const CURRENT_TILE_ALIVE = CURRENT_TILE.state == ALIVE
 
-
+                // only fill with white if cell is alive
                 if (CURRENT_TILE_ALIVE) {
                     fill(255)
                 } else {
@@ -58,6 +59,8 @@ class Generation {
         let aliveNeighbours = 0
         for (let j = -1; j <= 1; j++) {
             for (let i = -1; i <= 1; i++) {
+
+                // check if neighbour is out of bounds of grid
                 if (CURRENT_TILE_INDEX_X + i < 0 || CURRENT_TILE_INDEX_X + i >= this.size) {
                     continue
                 }
@@ -66,11 +69,14 @@ class Generation {
                     continue
                 }
 
+                // check if neighbour is same as current tile
                 if (i == 0 && j == 0) {
                     continue
                 }
 
-                if (this.grid[CURRENT_TILE_INDEX_X + i][CURRENT_TILE_INDEX_Y + j].state == ALIVE) {
+                // is current neighbour alive?
+                const CURRENT_NEIGHBOUR = this.grid[CURRENT_TILE_INDEX_X + i][CURRENT_TILE_INDEX_Y + j]
+                if (CURRENT_NEIGHBOUR.state == ALIVE) {
                     aliveNeighbours++
                 }
             }
