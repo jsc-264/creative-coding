@@ -92,22 +92,23 @@ class Generation {
                 const CURRENT_TILE_ALIVE = CURRENT_TILE.state == ALIVE
                 const CURRENT_TILE_DEAD = CURRENT_TILE.state == DEAD
 
-                // rules go here
-                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS < 2) { // underpopulation
-                    newGen.grid[i][j] = new Tile(i, j, DEAD)
+                // Rule 1. Any live cell with fewer than two live neighbors dies, as if caused by under population.
+                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS < 2) {
+                    newGen.grid[i][j].state = DEAD;
+                }
+                // Rule 2. Any live cell with two or three live neighbors lives on to the next generation.
+                if (CURRENT_TILE_ALIVE && (ALIVE_NEIGHBOURS == 2 || ALIVE_NEIGHBOURS == 3)) {
+                    newGen.grid[i][j].state = ALIVE;
+                }
+                // Rule 3. Any live cell with more than three live neighbors dies, as if by overpopulation.
+                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS > 3) {
+                    newGen.grid[i][j].state = DEAD;
+                }
+                // Rule 4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+                if (CURRENT_TILE_DEAD && ALIVE_NEIGHBOURS == 3) {
+                    newGen.grid[i][j].state = ALIVE;
                 }
 
-                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS >= 2 && ALIVE_NEIGHBOURS <= 3) { // next generation
-                    newGen.grid[i][j] = new Tile(i, j, ALIVE)
-                }
-
-                if (CURRENT_TILE_ALIVE && ALIVE_NEIGHBOURS > 3) { // overpopulation
-                    newGen.grid[i][j] = new Tile(i, j, DEAD)
-                }
-
-                if (CURRENT_TILE_DEAD && ALIVE_NEIGHBOURS == 3) { // reproduction
-                    newGen.grid[i][j] = new Tile(i, j, ALIVE)
-                }
             }
         }
 
