@@ -39,9 +39,10 @@ class Generation {
 
                 // only fill with white if cell is alive
                 if (CURRENT_TILE_ALIVE) {
-                    fill(255)
+                    const col = map(CURRENT_TILE.age, 0, frameCount, 120, 0)
+                    fill(col, 100, 75)
                 } else {
-                    fill(0)
+                    fill(0, 0, 0)
                 }
 
                 noStroke()
@@ -132,6 +133,10 @@ class Generation {
                 // Rule 4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
                 if (CURRENT_TILE_DEAD && ALIVE_NEIGHBOURS == 3) {
                     newGen.grid[i][j].state = ALIVE;
+                }
+
+                if (CURRENT_TILE.state == ALIVE) {
+                    newGen.grid[i][j].age = CURRENT_TILE.age + 1
                 }
 
             }

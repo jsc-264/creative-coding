@@ -7,5 +7,7 @@ class Tile {
         } else {
             this.state = random([DEAD, ALIVE])
         }
+
+        this.age = 0
     }
 }
