@@ -1,4 +1,4 @@
-const DIMENSION = 10
+const DIMENSION = 50
 let currentGen
 let tileSize
 
