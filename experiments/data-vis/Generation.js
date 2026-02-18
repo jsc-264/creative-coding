@@ -59,6 +59,11 @@ class Generation {
         let aliveNeighbours = 0
         for (let j = -1; j <= 1; j++) {
             for (let i = -1; i <= 1; i++) {
+                // check if neighbour is same as current tile
+                if (i == 0 && j == 0) {
+                    continue
+                }
+
                 let neighbour_tile_index_x = CURRENT_TILE_INDEX_X + i
                 let neighbour_tile_index_y = CURRENT_TILE_INDEX_Y + j
 
@@ -86,11 +91,6 @@ class Generation {
 
                 if (neighbour_tile_index_y >= this.size) {
                     neighbour_tile_index_y = 0
-                }
-
-                // check if neighbour is same as current tile
-                if (i == 0 && j == 0) {
-                    continue
                 }
 
                 // is current neighbour alive?
