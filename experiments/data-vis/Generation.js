@@ -59,16 +59,33 @@ class Generation {
         let aliveNeighbours = 0
         for (let j = -1; j <= 1; j++) {
             for (let i = -1; i <= 1; i++) {
-                const NEIGHBOUR_TILE_INDEX_X = CURRENT_TILE_INDEX_X + i
-                const NEIGHBOUR_TILE_INDEX_Y = CURRENT_TILE_INDEX_Y + j
+                let neighbour_tile_index_x = CURRENT_TILE_INDEX_X + i
+                let neighbour_tile_index_y = CURRENT_TILE_INDEX_Y + j
 
-                // check if neighbour is out of bounds of grid
-                if (NEIGHBOUR_TILE_INDEX_X < 0 || NEIGHBOUR_TILE_INDEX_X >= this.size) {
-                    continue
+                // // ignore neighbours put of bounds
+                // if (neighbour_tile_index_x < 0 || neighbour_tile_index_x >= this.size) {
+                //     continue
+                // }
+
+                // if (neighbour_tile_index_y < 0 || neighbour_tile_index_y >= this.size) {
+                //     continue
+                // }
+
+                // neighbour wrapping
+                if (neighbour_tile_index_x < 0) {
+                    neighbour_tile_index_x = this.size - 1
                 }
 
-                if (NEIGHBOUR_TILE_INDEX_Y < 0 || NEIGHBOUR_TILE_INDEX_Y >= this.size) {
-                    continue
+                if (neighbour_tile_index_x >= this.size) {
+                    neighbour_tile_index_x = 0
+                }
+
+                if (neighbour_tile_index_y < 0) {
+                    neighbour_tile_index_y = this.size - 1
+                }
+
+                if (neighbour_tile_index_y >= this.size) {
+                    neighbour_tile_index_y = 0
                 }
 
                 // check if neighbour is same as current tile
@@ -77,7 +94,7 @@ class Generation {
                 }
 
                 // is current neighbour alive?
-                const CURRENT_NEIGHBOUR = this.grid[NEIGHBOUR_TILE_INDEX_X][NEIGHBOUR_TILE_INDEX_Y]
+                const CURRENT_NEIGHBOUR = this.grid[neighbour_tile_index_x][neighbour_tile_index_y]
                 if (CURRENT_NEIGHBOUR.state == ALIVE) {
                     aliveNeighbours++
                 }
