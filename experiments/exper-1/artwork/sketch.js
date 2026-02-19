@@ -37,7 +37,6 @@ function drawPrism(x, y, size = 150) {
   let weight = map(noise(offsets.triangleX), 0, 1, 1, 7)
 
   push()
-
   translate(center.x, center.y)
   noFill()
   strokeWeight(weight)
