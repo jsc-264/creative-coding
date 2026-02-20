@@ -14,7 +14,11 @@ function setup() {
   scl = width / DIM
   noStroke()
 
-  ball = new Ball(0, 0)
+  textSize(7)
+  textAlign(CENTER, CENTER)
+  
+
+  ball = new Ball(random(width), random(height))
 
   for (let j = 0; j < DIM; j++) {
     for (let i = 0; i < DIM; i++) {
@@ -34,22 +38,30 @@ function draw() {
       const y = j * scl
 
       const shade = noise(noiseX, noiseY, noiseZ) * 255
-      const angle = noise(noiseX, noiseY, noiseZ) * TWO_PI
+      let n = noise(noiseX, noiseY, noiseZ)
+      let angle = map(n, 0, 1, -TWO_PI, TWO_PI)
+      // angle = map(mouseX, 0, width, 0, TWO_PI)
+      // // angle = constrain(angle, PI / 2, 3*PI / 2)
 
       const vect = p5.Vector.fromAngle(angle)
 
-      fill(shade)
-      rect(x, y, scl)
+      // fill(shade)
+      // rect(x, y, scl)
+      
+      // push()
+      // stroke(0)
+      // fill(0)
+      // text(`${i},${j}`, x+scl/2, y+scl/2)
+      // pop()
 
       push()
-      stroke(0)
+      stroke(0, 50)
       translate(x, y)
       rotate(vect.heading())
       line(0, 0, scl, 0)
       pop()
 
-      ball.update()
-      ball.render()
+      field[i][j] = vect
 
       noiseX += inc
     }
@@ -58,4 +70,7 @@ function draw() {
     noiseZ += inc/1000
   }
 
+  ball.follow(field)
+  ball.update()
+  ball.render()
 }
