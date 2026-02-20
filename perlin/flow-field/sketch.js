@@ -1,6 +1,6 @@
 const DIM = 20
 let scl
-let inc = 0.1
+let inc = 0.05
 
 let field = []
 
@@ -16,7 +16,7 @@ function setup() {
 
   textSize(7)
   textAlign(CENTER, CENTER)
-  
+
 
   ball = new Ball(random(width), random(height))
 
@@ -47,7 +47,7 @@ function draw() {
 
       // fill(shade)
       // rect(x, y, scl)
-      
+
       // push()
       // stroke(0)
       // fill(0)
@@ -67,7 +67,7 @@ function draw() {
     }
 
     noiseY += inc
-    noiseZ += inc/1000
+    noiseZ += inc / 1000
   }
 
   ball.follow(field)
