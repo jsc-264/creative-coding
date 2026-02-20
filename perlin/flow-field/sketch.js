@@ -2,13 +2,25 @@ const DIM = 20
 let scl
 let inc = 0.1
 
+let field = []
+
 let noiseX, noiseY
 let noiseZ = 0
+
+let ball
 
 function setup() {
   createCanvas(400, 400);
   scl = width / DIM
   noStroke()
+
+  ball = new Ball(0, 0)
+
+  for (let j = 0; j < DIM; j++) {
+    for (let i = 0; i < DIM; i++) {
+      field[i] = new Array(j)
+    }
+  }
 }
 
 function draw() {
@@ -35,6 +47,9 @@ function draw() {
       rotate(vect.heading())
       line(0, 0, scl, 0)
       pop()
+
+      ball.update()
+      ball.render()
 
       noiseX += inc
     }
