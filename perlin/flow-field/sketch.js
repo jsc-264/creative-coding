@@ -1,5 +1,6 @@
 const DIM = 20
 let scl
+let inc = 0.1
 
 let xoff, yoff
 
@@ -13,7 +14,7 @@ function draw() {
   yoff = 0
 
   for (let j = 0; j < DIM; j++) {
-    xoff = 1
+    xoff = 0
     for (let i = 0; i < DIM; i++) {
       const x = i * scl
       const y = j * scl
@@ -23,11 +24,10 @@ function draw() {
       fill(shade)
       rect(x, y, scl)
 
-      xoff += 0.1
+      xoff += inc
     }
 
-    yoff += 0.1
+    yoff += inc
   }
 
-  noLoop()
 }
