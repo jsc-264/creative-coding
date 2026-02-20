@@ -21,8 +21,17 @@ function draw() {
 
       const shade = noise(xoff, yoff) * 255
 
+      const vect = p5.Vector.fromAngle(random(TWO_PI))
+
       fill(shade)
       rect(x, y, scl)
+
+      push()
+      stroke(0)
+      translate(x, y)
+      rotate(vect.heading())
+      line(0, 0, scl, 0)
+      pop()
 
       xoff += inc
     }
