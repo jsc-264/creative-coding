@@ -2,7 +2,8 @@ const DIM = 20
 let scl
 let inc = 0.1
 
-let xoff, yoff
+let noiseX, noiseY
+let noiseZ = 0
 
 function setup() {
   createCanvas(400, 400);
@@ -11,17 +12,19 @@ function setup() {
 }
 
 function draw() {
-  yoff = 0
+  background(200)
+  noiseY = 0
 
   for (let j = 0; j < DIM; j++) {
-    xoff = 0
+    noiseX = 0
     for (let i = 0; i < DIM; i++) {
       const x = i * scl
       const y = j * scl
 
-      const shade = noise(xoff, yoff) * 255
+      const shade = noise(noiseX, noiseY, noiseZ) * 255
+      const angle = noise(noiseX, noiseY, noiseZ) * TWO_PI
 
-      const vect = p5.Vector.fromAngle(random(TWO_PI))
+      const vect = p5.Vector.fromAngle(angle)
 
       fill(shade)
       rect(x, y, scl)
@@ -33,10 +36,11 @@ function draw() {
       line(0, 0, scl, 0)
       pop()
 
-      xoff += inc
+      noiseX += inc
     }
 
-    yoff += inc
+    noiseY += inc
+    noiseZ += inc/1000
   }
 
 }
