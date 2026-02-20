@@ -32,8 +32,6 @@ class Ball {
     }
 
     follow(field) {
-        // print(this.pos.x, this.pos.y)
-
         const x = constrain(floor(this.pos.x / DIM), 0, DIM - 1)
         const y = constrain(floor(this.pos.y / DIM), 0, DIM - 1)
 
