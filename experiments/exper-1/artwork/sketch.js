@@ -1,9 +1,10 @@
 let offsets = {
   prismX: 1,
-  prismBlurX: 2
+  prismBlurX: 2,
+  beamAngleX: 3
 }
 
-function objTriangle(points){
+function objTriangle(points) {
   triangle(
     points.a.x, points.a.y,
     points.b.x, points.b.y,
@@ -11,11 +12,12 @@ function objTriangle(points){
   )
 }
 
-function addPrismBlur(center, points){
-  push()
-  noFill()
-  drawingContext.filter = "blur(10px)"
+function addPrismBlur(center, points) {
   let weight = map(noise(offsets.prismBlurX), 0, 1, 3, 10)
+
+  push()
+  drawingContext.filter = "blur(10px)"
+  noFill()
   strokeWeight(weight)
   stroke(255)
   translate(center.x, center.y)
@@ -46,13 +48,15 @@ function drawPrism(x, y, size = 150) {
   pop()
 }
 
-function drawLightBeam(x, y, angle, len = 190){
+function drawLightBeam(x, y) {
+  const weight = map(noise(offsets.beamAngleX), 0, 1, 1, 5)
   push()
   translate(x, y)
-  rotate(angle)
+  rotate(-30)
 
+  strokeWeight(weight)
   stroke(255)
-  line(0, 0, len, 0)
+  line(0, 0, 190, 0)
   pop()
 }
 
@@ -64,10 +68,10 @@ function setup() {
 function draw() {
   background(0);
   drawPrism(width / 2, height / 4)
-  drawLightBeam(0, height/2, -30)
+  drawLightBeam(0, height / 2)
 
 
-  for (const [key, value] of Object.entries(offsets)){
+  for (const [key, value] of Object.entries(offsets)) {
     offsets[key] = value + 0.01
   }
 }
