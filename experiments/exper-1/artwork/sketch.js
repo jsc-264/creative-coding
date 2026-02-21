@@ -46,13 +46,26 @@ function drawPrism(x, y, size = 150) {
   pop()
 }
 
+function drawLightBeam(x, y, angle, len = 190){
+  push()
+  translate(x, y)
+  rotate(angle)
+
+  stroke(255)
+  line(0, 0, len, 0)
+  pop()
+}
+
 function setup() {
   createCanvas(400, 400);
+  angleMode(DEGREES)
 }
 
 function draw() {
   background(0);
   drawPrism(width / 2, height / 4)
+  drawLightBeam(0, height/2, -30)
+
 
   for (const [key, value] of Object.entries(offsets)){
     offsets[key] = value + 0.01
