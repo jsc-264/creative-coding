@@ -1,8 +1,6 @@
-let x, y
-
-let vx, vy
-
-let ax, ay
+let pos
+let vel
+let acc
 
 const maxV = 5
 
@@ -10,66 +8,60 @@ function setup() {
   createCanvas(400, 400);
   colorMode(HSL)
 
-  x = width / 2
-  y = height / 2
-
-  ax = 0
-  ay = 0
+  pos = createVector(width/2, height/2)
+  vel = createVector(0, 0)
+  acc = createVector(0, 0)
 }
 
 function draw() {
   background(0, 0, 80);
 
-  vx = 0
-  vy = 0
+  vel.mult(0)
 
-  vx += ax
-  vy += ay
+  vel.add(acc)
 
-  vx = constrain(vx, -maxV, maxV)
-  vy = constrain(vy, -maxV, maxV)
+  vel.x = constrain(vel.x, -maxV, maxV)
+  vel.y = constrain(vel.y, -maxV, maxV)
 
-  x += vx
-  y += vy
+  pos.add(vel)
 
   if (keyIsDown(LEFT_ARROW)) {
-    ax -= 0.1
+    acc.x -= 0.1
   } else {
-    ax *= 0.99
+    acc.x *= 0.99
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
-    ax += 0.1
+    acc.x += 0.1
   } else {
-    ax *= 0.99
+    acc.x *= 0.99
   }
 
   if (keyIsDown(UP_ARROW)) {
-    ay -= 0.1
+    acc.y -= 0.1
   } else {
-    ay *= 0.99
+    acc.y *= 0.99
   }
 
   if (keyIsDown(DOWN_ARROW)) {
-    ay += 0.1
+    acc.y += 0.1
   } else {
-    ay *= 0.99
+    acc.y *= 0.99
   }
 
-  if (vx < 0.1 && vx > -0.1) {
-    vx = 0
+  if (vel.x < 0.1 && vel.x > -0.1) {
+    vel.x = 0
   }
 
-  if (vy < 0.1 && vy > -0.1) {
-    vy = 0
+  if (vel.y < 0.1 && vel.y > -0.1) {
+    vel.y = 0
   }
 
-  x = constrain(x, 0, width)
-  y = constrain(y, 0, height)
+  pos.x = constrain(pos.x, 0, width)
+  pos.y = constrain(pos.y, 0, height)
 
-  print(vx, vy)
 
-  const hue = map(dist(0, 0, vx, vy), 0, maxV, 180, 0)
+  const hue = map(vel.mag(), 0, maxV, 180, 0)
   fill(hue, 75, 50)
-  circle(x, y, 25)
+  circle(pos.x, pos.y, 25)
 }
