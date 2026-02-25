@@ -8,6 +8,7 @@ const maxV = 5
 
 function setup() {
   createCanvas(400, 400);
+  colorMode(HSL)
 
   x = width / 2
   y = height / 2
@@ -17,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(0, 0, 80);
 
   vx = 0
   vy = 0
@@ -55,16 +56,20 @@ function draw() {
     ay *= 0.99
   }
 
-  if (ax < 0.001 && ax > -0.001) {
-    ax = 0
+  if (vx < 0.1 && vx > -0.1) {
+    vx = 0
   }
 
-  if (ay < 0.001 && ay > -0.001) {
-    ay = 0
+  if (vy < 0.1 && vy > -0.1) {
+    vy = 0
   }
 
   x = constrain(x, 0, width)
   y = constrain(y, 0, height)
 
+  print(vx, vy)
+
+  const hue = map(dist(0, 0, vx, vy), 0, maxV, 180, 0)
+  fill(hue, 75, 50)
   circle(x, y, 25)
 }
