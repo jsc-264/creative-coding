@@ -1,4 +1,4 @@
-const DIMENSION = 10
+const DIMENSION = 50
 let currentGen
 let tileSize
 
@@ -9,6 +9,7 @@ const ALIVE = 1
 function setup() {
   createCanvas(400, 400);
   frameRate(10)
+  colorMode(HSB)
   tileSize = width / DIMENSION
 
   // initialise tile grid
@@ -17,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(0, 0, 0);
 
   currentGen.display()
 
