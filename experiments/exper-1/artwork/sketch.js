@@ -1,9 +1,11 @@
 let offsets = {
-  prismX: 1,
-  prismBlurX: 2,
-  beamX: 3,
-  beamBlurX: 4,
-  rainbowX: 5
+  prismWeight: 0,
+  prismBlur: 0,
+  beamWeight: 0,
+  beamBlur: 0,
+  rainbowWeight: 0,
+  rainbowBright: 0,
+  rainbowBlurWeight: 0
 }
 
 function objTriangle(points) {
@@ -24,7 +26,7 @@ function gradientLine(x, len, color1, color2) {
 }
 
 function addPrismBlur(center, points) {
-  let weight = map(noise(offsets.prismBlurX), 0, 1, 3, 10)
+  let weight = map(noise(offsets.prismBlur), 0, 1, 3, 10)
 
   push()
   drawingContext.filter = "blur(10px)"
@@ -47,7 +49,7 @@ function drawPrism(x, y, size = 150) {
 
   addPrismBlur(center, points)
 
-  let weight = map(noise(offsets.prismX), 0, 1, 1, 4)
+  let weight = map(noise(offsets.prismWeight), 0, 1, 1, 4)
 
   push()
   translate(center.x, center.y)
@@ -63,7 +65,7 @@ function drawPrism(x, y, size = 150) {
 function addLightBlur(x, y, len) {
   const colourStart = color(255)
   const colourEnd = color(255, 0)
-  const weight = map(noise(offsets.beamBlurX), 0, 1, 1, 3)
+  const weight = map(noise(offsets.beamBlur), 0, 1, 1, 3)
 
   push()
   drawingContext.filter = "blur(10px)"
@@ -75,7 +77,7 @@ function addLightBlur(x, y, len) {
 }
 
 function drawLightBeam(x, y, len = 190, colourStart = color(255), colourEnd = color(255, 0)) {
-  const weight = map(noise(offsets.beamX), 0, 1, 1, 3)
+  const weight = map(noise(offsets.beamWeight), 0, 1, 1, 3)
 
   addLightBlur(x, y, len)
 
@@ -87,16 +89,33 @@ function drawLightBeam(x, y, len = 190, colourStart = color(255), colourEnd = co
   pop()
 }
 
+function addRainbowBlur() {
+  const weight = map(noise(offsets.rainbowBlurWeight), 0, 1, 5, 7)
+
+  push()
+  drawingContext.filter = "blur(10px)"
+  colorMode(HSL)
+  strokeWeight(weight)
+  for (let i = 0; i < 7; i++) {
+    const col = map(i, 0, 7, 0, 360)
+    stroke(col, 100, 50)
+    line(width / 2 + width / 20, height / 2 - height / 4 + i * (weight - 2), width, height / 3 + i * weight)
+  }
+  pop()
+}
+
 function drawRainbow() {
-  const weight = map(noise(offsets.rainbowX), 0, 1, 6, 7)
-  const brightness = map(noise(offsets.rainbowX), 0, 1, 40, 60)
+  const weight = map(noise(offsets.rainbowWeight), 0, 1, 6, 7)
+  const bright = map(noise(offsets.rainbowBright), 0, 1, 40, 60)
+
+  addRainbowBlur()
 
   push()
   colorMode(HSL)
   strokeWeight(weight)
   for (let i = 0; i < 7; i++) {
     const col = map(i, 0, 7, 0, 360)
-    stroke(col, 100, 40)
+    stroke(col, 100, bright)
     line(width / 2 + width / 20, height / 2 - height / 4 + i * (weight - 2), width, height / 3 + i * weight)
   }
   pop()
@@ -105,6 +124,10 @@ function drawRainbow() {
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES)
+
+  for (const [key, _] of Object.entries(offsets)) {
+    offsets[key] = random(0, 1)
+  }
 }
 
 function draw() {
@@ -113,8 +136,10 @@ function draw() {
   drawPrism(width / 2, height / 4)
   drawLightBeam(0, height / 2)
 
+  console.table(offsets)
+
 
   for (const [key, value] of Object.entries(offsets)) {
-    offsets[key] = value + 0.01
+    offsets[key] = value + random(0.01, 0.03)
   }
 }
