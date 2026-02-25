@@ -2,13 +2,18 @@ let x, y
 
 let vx, vy
 
-const speed = 5
+let ax, ay
+
+const maxV = 5
 
 function setup() {
   createCanvas(400, 400);
 
   x = width / 2
   y = height / 2
+
+  ax = 0
+  ay = 0
 }
 
 function draw() {
@@ -17,12 +22,49 @@ function draw() {
   vx = 0
   vy = 0
 
-  if (keyIsDown(LEFT_ARROW)) vx -= speed
-  if (keyIsDown(RIGHT_ARROW)) vx += speed
-  if (keyIsDown(UP_ARROW)) vy -= speed
-  if (keyIsDown(DOWN_ARROW)) vy += speed
+  vx += ax
+  vy += ay
+
+  vx = constrain(vx, -maxV, maxV)
+  vy = constrain(vy, -maxV, maxV)
 
   x += vx
   y += vy
-  circle(x, y, 50)
+
+  if (keyIsDown(LEFT_ARROW)) {
+    ax -= 0.1
+  } else {
+    ax *= 0.99
+  }
+
+  if (keyIsDown(RIGHT_ARROW)) {
+    ax += 0.1
+  } else {
+    ax *= 0.99
+  }
+
+  if (keyIsDown(UP_ARROW)) {
+    ay -= 0.1
+  } else {
+    ay *= 0.99
+  }
+
+  if (keyIsDown(DOWN_ARROW)) {
+    ay += 0.1
+  } else {
+    ay *= 0.99
+  }
+
+  if (ax < 0.001 && ax > -0.001) {
+    ax = 0
+  }
+
+  if (ay < 0.001 && ay > -0.001) {
+    ay = 0
+  }
+
+  x = constrain(x, 0, width)
+  y = constrain(y, 0, height)
+
+  circle(x, y, 25)
 }
