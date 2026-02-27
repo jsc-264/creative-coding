@@ -6,8 +6,8 @@ class Body {
   constructor(x, y, w, h){
     this.pos = createVector(x, y)
     this.dim = {
-      width: w,
-      height: h
+      w: w,
+      h: h
     }
 
     this.vel = createVector(0, 0)
@@ -16,7 +16,11 @@ class Body {
   render() {
     this.vel.add(0, g)
     this.pos.add(this.vel)
-    rect(this.pos.x, this.pos.y, this.dim.width, this.dim.height)
+
+    this.pos.y = constrain(this.pos.y, 0, height-this.dim.h)
+
+    noStroke()
+    rect(this.pos.x, this.pos.y, this.dim.w, this.dim.h)
   }
 }
 
@@ -26,6 +30,6 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(50);
   b.render()
 }
