@@ -17,19 +17,22 @@ class Body {
     this.vel.add(0, g)
     this.pos.add(this.vel)
 
-    this.pos.y = constrain(this.pos.y, 0, height-this.dim.h)
+    this.pos.y = constrain(this.pos.y, 0, height-this.dim.h/2)
 
     noStroke()
+    fill(200)
     rect(this.pos.x, this.pos.y, this.dim.w, this.dim.h)
   }
 }
 
 function setup() {
   createCanvas(400, 400);
+  rectMode(CENTER)
   b = new Body(100, 100, 50, 50)
 }
 
 function draw() {
   background(50);
   b.render()
+  b.pos.x = mouseX
 }
