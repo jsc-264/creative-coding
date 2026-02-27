@@ -1,3 +1,5 @@
+let g = 1
+
 let b
 
 class Body {
@@ -7,9 +9,13 @@ class Body {
       width: w,
       height: h
     }
+
+    this.vel = createVector(0, 0)
   }
 
   render() {
+    this.vel.add(0, g)
+    this.pos.add(this.vel)
     rect(this.pos.x, this.pos.y, this.dim.width, this.dim.height)
   }
 }
