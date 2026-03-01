@@ -23,8 +23,10 @@ class Body {
     this.vel.add(0, g)
     this.pos.add(this.vel)
 
-    this.pos.y = constrain(this.pos.y, 0, height - this.dim.h / 2)
-
+    if (this.pos.y > height - this.dim.h / 2) {
+      this.pos.y = height - this.dim.h / 2
+      this.vel.y = 0
+    }
   }
 }
 
