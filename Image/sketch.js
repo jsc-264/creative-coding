@@ -1,7 +1,6 @@
-const DIM = 20
+const DIM = 100
 let w
 let img
-
 
 function preload() {
   img = loadImage("parrot.jpeg")
@@ -15,7 +14,7 @@ function setup() {
 function draw() {
   background(220)
 
-  image(img, 0, 0)
+  // image(img, 0, 0)
 
   img.loadPixels()
 
@@ -24,6 +23,7 @@ function draw() {
       const x = i * w
       const y = j * w
 
+
       const index = (x + y * width) * 4
 
       const red = img.pixels[index]
@@ -31,6 +31,7 @@ function draw() {
       const blue = img.pixels[index + 2]
 
       fill(red, green, blue)
+      noStroke()
       rect(x, y, w)
     }
   }
