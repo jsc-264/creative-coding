@@ -1,13 +1,19 @@
-const DIM = 100
+const DIM = 50
 let w
 let img
 
+const chars = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+ ~<>i!lI;:,^`'.    "
+let charsList
+
 function preload() {
   img = loadImage("parrot.jpeg")
+  charsList = chars.split("")
+  print(charsList)
 }
 
 function setup() {
   createCanvas(400, 400)
+  textAlign(CENTER, CENTER)
   w = floor(width / DIM)
 }
 
@@ -30,18 +36,13 @@ function draw() {
       const blue = img.pixels[index + 2]
 
       const bright = (red+green+blue) / 3
+      const charIndex = floor(map(bright, 0, 255, charsList.length-1, 0))
 
-      const weight = map(bright, 0, 255, 0, w/2)
-      const angle = map(bright, 0, 255, 0, PI)
 
-      strokeWeight(weight)
-      stroke(255)
-
-      push()
-      translate(x+w/2, y+w/2)
-      rotate(angle)
-      line(-w/2, 0, w/2, 0)
-      pop()
+      noStroke()
+      fill(255)
+      textSize(w)
+      text(charsList[charIndex], x+w/2, y+w/2)
     }
   }
 }
