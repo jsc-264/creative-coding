@@ -140,6 +140,6 @@ function draw() {
 
 
   for (const [key, value] of Object.entries(offsets)) {
-    offsets[key] = value + random(0.01, 0.03)
+    offsets[key] = value + random(0.05, 0.1)
   }
 }
