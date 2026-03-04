@@ -8,11 +8,11 @@ function preload() {
 
 function setup() {
   createCanvas(400, 400)
-  w = width / DIM
+  w = floor(width / DIM)
 }
 
 function draw() {
-  background(220)
+  background(50)
 
   // image(img, 0, 0)
 
@@ -30,9 +30,15 @@ function draw() {
       const green = img.pixels[index + 1]
       const blue = img.pixels[index + 2]
 
-      fill(red, green, blue)
+      const bright = (red+green+blue) / 3
+      const diam = map(bright, 0, 255, 0, w)
+
       noStroke()
-      rect(x, y, w)
+      circle(x+w/2, y+w/2, diam)
+
+      // fill(bright)
+      // noStroke()
+      // rect(x, y, w)
     }
   }
 }
