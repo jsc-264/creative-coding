@@ -2,7 +2,7 @@ const DIM = 50
 let w
 let img
 
-const chars = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+ ~<>i!lI;:,^`'.    "
+const chars = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+ ~<>i!lI;:,^`'.                      "
 let charsList
 
 function preload() {
@@ -40,7 +40,7 @@ function draw() {
 
 
       noStroke()
-      fill(255)
+      fill(red, green, blue)
       textSize(w)
       text(charsList[charIndex], x+w/2, y+w/2)
     }
