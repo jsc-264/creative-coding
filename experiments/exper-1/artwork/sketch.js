@@ -8,6 +8,8 @@ let offsets = {
   rainbowBlurWeight: 0
 }
 
+let colSlider
+
 function objTriangle(points) {
   triangle(
     points.a.x, points.a.y,
@@ -104,7 +106,7 @@ function addRainbowBlur() {
   pop()
 }
 
-function drawRainbow() {
+function drawRainbow(colStart) {
   const weight = map(noise(offsets.rainbowWeight), 0, 1, 6, 7)
   const bright = map(noise(offsets.rainbowBright), 0, 1, 40, 60)
 
@@ -114,7 +116,7 @@ function drawRainbow() {
   colorMode(HSL)
   strokeWeight(weight)
   for (let i = 0; i < 7; i++) {
-    const col = map(i, 0, 7, 0, 360)
+    const col = map(i, 0, 7, colStart, colStart+360) % 360
     stroke(col, 100, bright)
     line(width / 2 + width / 20, height / 2 - height / 4 + i * (weight - 2), width, height / 3 + i * weight)
   }
@@ -125,6 +127,8 @@ function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES)
 
+  colSlider = createSlider(0, 360)
+
   for (const [key, _] of Object.entries(offsets)) {
     offsets[key] = random(0, 1)
   }
@@ -132,7 +136,7 @@ function setup() {
 
 function draw() {
   background(0);
-  drawRainbow()
+  drawRainbow(colSlider.value)
   drawPrism(width / 2, height / 4)
   drawLightBeam(0, height / 2)
 
