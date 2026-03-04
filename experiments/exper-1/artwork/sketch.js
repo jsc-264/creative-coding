@@ -5,7 +5,8 @@ let offsets = {
   beamBlur: 0,
   rainbowWeight: 0,
   rainbowBright: 0,
-  rainbowBlurWeight: 0
+  rainbowBlurWeight: 0,
+  rainbowColourShift: 0
 }
 
 function objTriangle(points) {
@@ -91,13 +92,14 @@ function drawLightBeam(x, y, len = 190, colourStart = color(255), colourEnd = co
 
 function addRainbowBlur() {
   const weight = map(noise(offsets.rainbowBlurWeight), 0, 1, 5, 7)
+  const colourShift = map(noise(offsets.rainbowColourShift), 0, 1, 0, 180)
 
   push()
   drawingContext.filter = "blur(10px)"
   colorMode(HSL)
   strokeWeight(weight)
   for (let i = 0; i < 7; i++) {
-    const col = map(i, 0, 7, 0, 360)
+    const col = map(i, 0, 7, colourShift, colourShift + 360) % 360
     stroke(col, 100, 50)
     line(width / 2 + width / 20, height / 2 - height / 4 + i * (weight - 2), width, height / 3 + i * weight)
   }
@@ -107,6 +109,7 @@ function addRainbowBlur() {
 function drawRainbow() {
   const weight = map(noise(offsets.rainbowWeight), 0, 1, 6, 7)
   const bright = map(noise(offsets.rainbowBright), 0, 1, 40, 60)
+  const colourShift = map(noise(offsets.rainbowColourShift), 0, 1, 0, 180)
 
   addRainbowBlur()
 
@@ -114,7 +117,7 @@ function drawRainbow() {
   colorMode(HSL)
   strokeWeight(weight)
   for (let i = 0; i < 7; i++) {
-    const col = map(i, 0, 7, 0, 360)
+    const col = map(i, 0, 7, colourShift, colourShift+360) % 360
     stroke(col, 100, bright)
     line(width / 2 + width / 20, height / 2 - height / 4 + i * (weight - 2), width, height / 3 + i * weight)
   }
