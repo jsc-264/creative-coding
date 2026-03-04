@@ -12,7 +12,7 @@ function setup() {
 }
 
 function draw() {
-  background(50)
+  background(0)
 
   // image(img, 0, 0)
 
@@ -23,7 +23,6 @@ function draw() {
       const x = i * w
       const y = j * w
 
-
       const index = (x + y * width) * 4
 
       const red = img.pixels[index]
@@ -31,14 +30,18 @@ function draw() {
       const blue = img.pixels[index + 2]
 
       const bright = (red+green+blue) / 3
-      const diam = map(bright, 0, 255, 0, w)
 
-      noStroke()
-      circle(x+w/2, y+w/2, diam)
+      const weight = map(bright, 0, 255, 0, w/2)
+      const angle = map(bright, 0, 255, 0, PI)
 
-      // fill(bright)
-      // noStroke()
-      // rect(x, y, w)
+      strokeWeight(weight)
+      stroke(255)
+
+      push()
+      translate(x+w/2, y+w/2)
+      rotate(angle)
+      line(-w/2, 0, w/2, 0)
+      pop()
     }
   }
 }
