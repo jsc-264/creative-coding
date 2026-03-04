@@ -136,7 +136,7 @@ function setup() {
 
 function draw() {
   background(0);
-  drawRainbow(colSlider.value)
+  drawRainbow(colSlider.value())
   drawPrism(width / 2, height / 4)
   drawLightBeam(0, height / 2)
 
