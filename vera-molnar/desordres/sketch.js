@@ -1,8 +1,18 @@
 const DIM = 10
 let w
 
+function randomSquare(x, y, w, randFactor = 2){
+  const r = w/2
+  beginShape()
+  vertex(x-r+random(-randFactor, randFactor), y-r+random(-randFactor, randFactor))
+  vertex(x+r+random(-randFactor, randFactor), y-r+random(-randFactor, randFactor))
+  vertex(x+r+random(-randFactor, randFactor), y+r+random(-randFactor, randFactor))
+  vertex(x-r+random(-randFactor, randFactor), y+r+random(-randFactor, randFactor))
+  endShape(CLOSE)
+}
+
 function drawSquare(x, y, w) {
-  const layers = random(4, 6)
+  const layers = random(6, 8)
 
   noFill()
   rect(x, y, w)
@@ -11,11 +21,12 @@ function drawSquare(x, y, w) {
     if (random(1) < 0.7) {
 
       const div = map(i, 0, layers, 1.2, 6)
+      const scl = w / div
 
       push()
       translate(x, y)
       rotate(random(-20 / layers, 20 / layers))
-      rect(0, 0, w / div)
+      randomSquare(0, 0, w / div)
       pop()
     }
   }
