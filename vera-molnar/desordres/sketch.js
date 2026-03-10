@@ -1,4 +1,4 @@
-const DIM = 10
+let DIM
 let w
 
 function randomSquare(x, y, w, randFactor = 2){
@@ -36,7 +36,8 @@ function setup() {
   createCanvas(600, 600);
   rectMode(CENTER)
   angleMode(DEGREES)
-
+  
+  DIM = floor(random(10, 20))
   w = width / DIM
 }
 
