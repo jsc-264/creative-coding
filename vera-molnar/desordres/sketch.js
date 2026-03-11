@@ -1,13 +1,13 @@
 let DIM
 let w
 
-function randomSquare(x, y, w, randFactor = 2){
-  const r = w/2
+function randomSquare(x, y, w, randFactor = 2) {
+  const r = w / 2
   beginShape()
-  vertex(x-r+random(-randFactor, randFactor), y-r+random(-randFactor, randFactor))
-  vertex(x+r+random(-randFactor, randFactor), y-r+random(-randFactor, randFactor))
-  vertex(x+r+random(-randFactor, randFactor), y+r+random(-randFactor, randFactor))
-  vertex(x-r+random(-randFactor, randFactor), y+r+random(-randFactor, randFactor))
+  vertex(x - r + random(-randFactor, randFactor), y - r + random(-randFactor, randFactor))
+  vertex(x + r + random(-randFactor, randFactor), y - r + random(-randFactor, randFactor))
+  vertex(x + r + random(-randFactor, randFactor), y + r + random(-randFactor, randFactor))
+  vertex(x - r + random(-randFactor, randFactor), y + r + random(-randFactor, randFactor))
   endShape(CLOSE)
 }
 
@@ -36,7 +36,7 @@ function setup() {
   createCanvas(600, 600);
   rectMode(CENTER)
   angleMode(DEGREES)
-  
+
   DIM = floor(random(10, 20))
   w = width / DIM
 }
@@ -56,7 +56,7 @@ function draw() {
 }
 
 function keyPressed() {
-  if (key == " "){
+  if (key == " ") {
     redraw()
   }
 }
