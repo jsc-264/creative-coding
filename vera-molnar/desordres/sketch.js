@@ -54,3 +54,9 @@ function draw() {
 
   noLoop()
 }
+
+function keyPressed() {
+  if (key == " "){
+    redraw()
+  }
+}
