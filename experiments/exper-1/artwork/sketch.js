@@ -8,12 +8,13 @@ let offsets = {
   rainbowBlurWeight: 0
 }
 
-function objTriangle(points) {
-  triangle(
-    points.a.x, points.a.y,
-    points.b.x, points.b.y,
-    points.c.x, points.c.y,
-  )
+function objSquare(points) {
+  beginShape()
+  vertex(points.a.x, points.a.y)
+  vertex(points.b.x, points.b.y)
+  vertex(points.c.x, points.c.y)
+  vertex(points.d.x, points.d.y)
+  endShape(CLOSE)
 }
 
 function gradientLine(x, len, color1, color2) {
@@ -34,18 +35,19 @@ function addPrismBlur(center, points) {
   strokeWeight(weight)
   stroke(255)
   translate(center.x, center.y)
-  objTriangle(points)
+  objSquare(points)
   pop()
 }
 
-function drawPrism(x, y, size = 150) {
+function drawPrism(x, y, size) {
   const points = {
     a: createVector(0, 0),
     b: createVector(size, 0),
-    c: createVector(size / 2, -(size * sqrt(3)) / 2),
+    c: createVector(size, size),
+    d: createVector(0, size)
   }
 
-  const center = createVector(x - size / 2, y + size / 2)
+  const center = createVector(x, y)
 
   addPrismBlur(center, points)
 
@@ -57,7 +59,7 @@ function drawPrism(x, y, size = 150) {
   strokeWeight(weight)
   stroke(255)
   fill(0)
-  objTriangle(points)
+  objSquare(points)
 
   pop()
 }
@@ -132,9 +134,10 @@ function setup() {
 
 function draw() {
   background(0);
+  const prismSize = 150
   drawRainbow()
-  drawPrism(width / 2, height / 4)
   drawLightBeam(0, height / 2)
+  drawPrism(width / 2 - prismSize/2, height / 8, prismSize)
 
   console.table(offsets)
 
