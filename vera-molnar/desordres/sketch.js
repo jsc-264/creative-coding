@@ -1,4 +1,4 @@
-let DIM
+const DIM = 10
 let w
 
 function randomSquare(x, y, w, randFactor = 2) {
@@ -43,7 +43,6 @@ function setup() {
   rectMode(CENTER)
   angleMode(DEGREES)
 
-  DIM = floor(random(10, 20))
   w = width / DIM
 }
 
