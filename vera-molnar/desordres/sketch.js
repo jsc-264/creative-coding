@@ -1,7 +1,7 @@
-const DIM = 10
+const DIM = 13
 let w
 
-function randomSquare(x, y, w, randFactor = 2) {
+function randomSquare(x, y, w, randFactor = 1) {
   const r = w / 2
   beginShape()
   // top edge
@@ -17,21 +17,20 @@ function randomSquare(x, y, w, randFactor = 2) {
 }
 
 function drawSquare(x, y, w) {
-  const layers = random(6, 8)
+  const layers = random(5, 8)
 
   noFill()
   rect(x, y, w)
 
-  for (let i = 0; i < layers; i++) {
+  for (let i = 1; i <= layers; i++) {
+    const scl = i * (w / layers)
+
+    const weight = random(0.5, 2.5)
+
     if (random(1) < 0.7) {
-
-      // map layer to scale of square
-      const div = map(i, 0, layers, 1.2, 6)
-      const scl = w / div
-
       push()
       translate(x, y)
-      rotate(random(-20 / layers, 20 / layers))
+      strokeWeight(weight)
       randomSquare(0, 0, scl)
       pop()
     }
