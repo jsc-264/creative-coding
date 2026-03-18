@@ -1,7 +1,7 @@
 const DIM = 13
 let w
 
-function randomSquare(x, y, w, randFactor = 1) {
+function randomSquare(x, y, w, randFactor = 2) {
   const r = w / 2
   beginShape()
   // top edge
