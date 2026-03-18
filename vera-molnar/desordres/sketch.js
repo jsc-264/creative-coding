@@ -30,6 +30,8 @@ function drawSquare(x, y, w) {
     if (random(1) < 0.7) {
       push()
       translate(x, y)
+      const hu = random(0, 360)
+      stroke(hu, 50, 70)
       strokeWeight(weight)
       randomSquare(0, 0, scl)
       pop()
@@ -41,12 +43,13 @@ function setup() {
   createCanvas(600, 600);
   rectMode(CENTER)
   angleMode(DEGREES)
+  colorMode(HSB)
 
   w = width / DIM
 }
 
 function draw() {
-  background(220);
+  background(0, 0, 80);
 
   // loop through every square on canvas
   for (let i = 0; i < DIM; i++) {
