@@ -26,7 +26,7 @@ function draw() {
   }
 }
 
-function wave(spectrum, x, y, w, h) {
+function wave(spectrum) {
   for (let i = spectrum.length - 1; i >= 0; i--) {
     let amp = spectrum[i]
     if (amp <= 2) {
@@ -38,9 +38,9 @@ function wave(spectrum, x, y, w, h) {
 
   for (let i = 0; i < spectrum.length; i++) {
     let amp = spectrum[i];
-    let ampX = w * i
+    let ampX = ampW * i
     let ampY = map(amp, 0, 256, height, 0);
-    rect(ampX, y, ampW, height - y);
+    rect(ampX, ampY, ampW, height - ampY);
   }
 }
 
