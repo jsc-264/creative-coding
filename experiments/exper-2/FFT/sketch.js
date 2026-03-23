@@ -1,27 +1,32 @@
 let song;
 let fft;
+let paused = false;
 
-function wave(spectrum, x, y, w, h) {
-  const ampW = w / spectrum.length
+function wave(spectrum, coords, dim, col) {
+  const ampW = dim.w / spectrum.length
 
   push()
-  translate(x, y)
+  translate(coords.x, coords.y)
 
   for (let i = 0; i < spectrum.length; i++) {
     const amp = spectrum[i];
     const ampX = ampW * i
-    const ampY = map(amp, 0, 256, h, 0);
-    rect(ampX, ampY, ampW, h - ampY);
+    const ampY = map(amp, 0, 256, dim.h, 0);
+    noStroke()
+    fill(col)
+    rect(ampX, ampY, ampW, dim.h - ampY);
   }
   pop()
 }
 
 function keyPressed() {
   if (key == " ") {
-    if (song.isPlaying()) {
-      song.pause();
+    paused = !paused
+
+    if (paused) {
+      noLoop()
     } else {
-      song.play();
+      loop()
     }
   }
 }
@@ -36,17 +41,29 @@ function setup() {
 
   fft = new p5.FFT(0.8, 1024);
   fft.setInput(song)
-  fill(0)
 }
 
 function draw() {
-  background(220);
+  background(50);
+  if (song.isPlaying() && paused) {
+    song.pause();
+  } else if (!song.isPlaying() && !paused) {
+    song.play();
+  }
+
   const spectrum = fft.analyze()
 
   if (song.isPlaying()) {
     text("Playing", 10, 20);
-    wave(spectrum, 0, 0, width, height)
   } else {
     text("Paused", 10, 20);
   }
+
+  wave(spectrum, {
+    x: 0,
+    y: 0
+  }, {
+    w: width,
+    h: height
+  }, color(0, 175, 0))
 }
