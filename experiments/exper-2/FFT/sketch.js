@@ -20,31 +20,29 @@ function draw() {
 
   if (song.isPlaying()) {
     text("Playing", 10, 20);
-    wave(spectrum)
+    wave(spectrum, 100, 100, width/2, 50)
   } else {
     text("Paused", 10, 20);
+    wave(spectrum) 
   }
 }
 
-function wave(spectrum) {
-  for (let i = spectrum.length - 1; i >= 0; i--) {
-    let amp = spectrum[i]
-    if (amp <= 2) {
-      spectrum.splice(i, 1)
-    }
-  }
+function wave(spectrum, x, y, w, h) {
+  const ampW = w / spectrum.length
 
-  const ampW = width / spectrum.length
+  push()
+  translate(x, y)
 
   for (let i = 0; i < spectrum.length; i++) {
-    let amp = spectrum[i];
-    let ampX = ampW * i
-    let ampY = map(amp, 0, 256, height, 0);
-    rect(ampX, ampY, ampW, height - ampY);
+    const amp = spectrum[i];
+    const ampX = ampW * i
+    const ampY = map(amp, 0, 256, h, 0);
+    rect(ampX, ampY, ampW, h - ampY);
   }
+  pop()
 }
 
-function keyPressed() {
+function keyPressed() { 
   if (key == " ") {
     if (song.isPlaying()) {
       song.pause();
