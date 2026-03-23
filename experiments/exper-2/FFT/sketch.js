@@ -3,12 +3,13 @@ let fft;
 let paused = false;
 
 function wave(spectrum, coords, dim, col) {
-  const ampW = dim.w / spectrum.length
+  const bins = spectrum.length
+  const ampW = dim.w / bins
 
   push()
   translate(coords.x, coords.y)
 
-  for (let i = 0; i < spectrum.length; i++) {
+  for (let i = 0; i < bins; i++) {
     const amp = spectrum[i];
     const ampX = ampW * i
     const ampY = map(amp, 0, 256, dim.h, 0);
@@ -24,8 +25,10 @@ function keyPressed() {
     paused = !paused
 
     if (paused) {
+      song.pause()
       noLoop()
     } else {
+      song.play()
       loop()
     }
   }
@@ -45,11 +48,6 @@ function setup() {
 
 function draw() {
   background(50);
-  if (song.isPlaying() && paused) {
-    song.pause();
-  } else if (!song.isPlaying() && !paused) {
-    song.play();
-  }
 
   const spectrum = fft.analyze()
 
