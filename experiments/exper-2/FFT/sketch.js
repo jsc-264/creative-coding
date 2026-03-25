@@ -1,24 +1,7 @@
 let song;
 let fft;
 let paused = false;
-
-function wave(spectrum, coords, dim, col) {
-  const bins = spectrum.length
-  const ampW = dim.w / bins
-
-  push()
-  translate(coords.x, coords.y)
-
-  for (let i = 0; i < bins; i++) {
-    const amp = spectrum[i];
-    const ampX = ampW * i
-    const ampY = map(amp, 0, 256, dim.h, 0);
-    noStroke()
-    fill(col)
-    rect(ampX, ampY, ampW, dim.h - ampY);
-  }
-  pop()
-}
+let colours = {}
 
 function keyPressed() {
   if (key == " ") {
@@ -40,6 +23,11 @@ function preload() {
 
 function setup() {
   createCanvas(400, 400);
+
+  colours = {
+    green: color(0, 175, 0)
+  }
+
   song.play();
 
   fft = new p5.FFT(0.8, 1024);
@@ -50,6 +38,7 @@ function draw() {
   background(50);
 
   const spectrum = fft.analyze()
+  const frame = new AudioFrame(spectrum)
 
   if (song.isPlaying()) {
     text("Playing", 10, 20);
@@ -57,11 +46,5 @@ function draw() {
     text("Paused", 10, 20);
   }
 
-  wave(spectrum, {
-    x: 0,
-    y: 0
-  }, {
-    w: width,
-    h: height
-  }, color(0, 175, 0))
+  frame.showFullSpectrum(0, 0, width, height, colours.green)
 }
