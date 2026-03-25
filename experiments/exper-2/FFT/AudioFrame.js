@@ -42,6 +42,8 @@ class AudioFrame {
             const amp = lows[i];
             const ampX = ampW * i
             const ampY = map(amp, 0, 256, h, 0);
+
+            strokeWeight(2)
             stroke(col)
             vertex(ampX, ampY);
         }
@@ -49,7 +51,7 @@ class AudioFrame {
         pop()
     }
 
-    showMids(x, y, r, fromCol = colours.orange, toCol = colours.purple) {
+    showMids(x, y, r, col = colours.purple) {
         const mids = this.levels.lows
         const midBins = mids.length
 
@@ -58,11 +60,12 @@ class AudioFrame {
         translate(x, y)
 
         noFill()
+        stroke(col)
         strokeWeight(3)
         beginShape()
         for (let i = 0; i < midBins; i++) {
             const a = map(i, 0, midBins, 0, 360)
-            const ampD = map(mids[i], 0, 255, r / 2, r * 2)
+            const ampD = map(mids[i], 0, 255, r / 4, r * 2)
 
             const px = sin(a) * ampD
             const py = cos(a) * ampD

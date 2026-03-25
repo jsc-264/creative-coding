@@ -22,7 +22,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(600, 400);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES)
 
   colours = {
@@ -35,7 +35,7 @@ function setup() {
 
   song.play();
 
-  fft = new p5.FFT(0.8, 1024);
+  fft = new p5.FFT(0.75, 512); 
   fft.setInput(song)
 }
 
