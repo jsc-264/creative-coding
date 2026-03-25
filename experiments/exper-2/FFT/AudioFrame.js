@@ -48,4 +48,18 @@ class AudioFrame {
         endShape()
         pop()
     }
+
+    showMids(x, y, r, fromCol = colours.orange, toCol = colours.purple) {
+        const mids = this.levels.mids
+        const midBins = mids.length
+
+        for (let i = 0; i < midBins; i++) {
+            const lerpAmt = map(i, 0, midBins, 0, 1)
+            const amp = mids[i]
+            const ampR = map(amp, 0, 255, 10, r)
+            noStroke()
+            fill(lerpColor(fromCol, toCol, lerpAmt))
+            circle(x, y, ampR)
+        }
+    }
 }

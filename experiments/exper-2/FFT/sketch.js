@@ -53,4 +53,5 @@ function draw() {
 
   frame.showFullSpectrum(0, 0, width, height)
   frame.showLows(width, 0, width, height/3, 90)
+  frame.showMids(width / 4, height / 4, 200)
 }
