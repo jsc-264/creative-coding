@@ -51,10 +51,21 @@ class AudioFrame {
         pop()
     }
 
+    radial(level, r) {
+        beginShape()
+        for (let i = 0; i < level.length; i++) {
+            const a = map(i, 0, level.length, 0, 360)
+            const ampD = map(level[i], 0, 255, r / 4, r * 2)
+
+            const px = sin(a) * ampD
+            const py = cos(a) * ampD
+            vertex(px, py)
+        }
+        endShape()
+    }
+
     showMids(x, y, r, col = colours.purple) {
         const mids = this.levels.lows
-        const midBins = mids.length
-
 
         push()
         translate(x, y)
@@ -62,16 +73,9 @@ class AudioFrame {
         noFill()
         stroke(col)
         strokeWeight(3)
-        beginShape()
-        for (let i = 0; i < midBins; i++) {
-            const a = map(i, 0, midBins, 0, 360)
-            const ampD = map(mids[i], 0, 255, r / 4, r * 2)
-
-            const px = sin(a) * ampD
-            const py = cos(a) * ampD
-            vertex(px, py)
+        for (let i = 1; i <= 3; i++) {
+            this.radial(mids, r * i/2)
         }
-        endShape()
 
         pop()
     }

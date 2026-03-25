@@ -27,7 +27,7 @@ function setup() {
 
   colours = {
     grey: color(50),
-    green: color(0, 175, 0),
+    green: color(0, 175, 0, 200),
     purple: color(105, 20, 170),
     pink: color(200, 20, 195),
     orange: color(230, 180, 50)
@@ -35,9 +35,11 @@ function setup() {
 
   song.play();
 
-  fft = new p5.FFT(0.75, 512); 
+  fft = new p5.FFT(0.75, 512);
   fft.setInput(song)
 }
+
+let vols = []
 
 function draw() {
   background(colours.grey);
@@ -51,7 +53,7 @@ function draw() {
     text("Paused", 10, 20);
   }
 
-  frame.showFullSpectrum(0, 0, width, height)
+  frame.showFullSpectrum(0, height/2, width, height/2)
   frame.showLows(width, 0, width, height/3, 90)
   frame.showMids(width / 4, height / 4, 50)
 }
