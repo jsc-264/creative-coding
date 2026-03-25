@@ -4,13 +4,13 @@ class AudioFrame {
         this.bins = this.spectrum.length
 
         this.levels = {
-            lows: this.spectrum.slice(0, this.bins/3),
-            mids: this.spectrum.slice(this.bins/3, 2*this.bins/3),
-            highs: this.spectrum.slice(this.bins-5)
+            lows: this.spectrum.slice(0, this.bins / 3),
+            mids: this.spectrum.slice(this.bins / 3, 2 * this.bins / 3),
+            highs: this.spectrum.slice(this.bins - 5)
         }
     }
 
-    showFullSpectrum(x, y, w, h, col=colours.green) {
+    showFullSpectrum(x, y, w, h, col = colours.green) {
         const ampW = w / this.bins
 
         push()
@@ -27,7 +27,7 @@ class AudioFrame {
         pop()
     }
 
-    showLows(x, y, w, h, angle, col=colours.pink) {
+    showLows(x, y, w, h, angle, col = colours.pink) {
         const lows = this.levels.lows
         const lowBins = lows.length
         const ampW = w / lowBins
@@ -50,16 +50,26 @@ class AudioFrame {
     }
 
     showMids(x, y, r, fromCol = colours.orange, toCol = colours.purple) {
-        const mids = this.levels.mids
+        const mids = this.levels.lows
         const midBins = mids.length
 
+
+        push()
+        translate(x, y)
+
+        noFill()
+        strokeWeight(3)
+        beginShape()
         for (let i = 0; i < midBins; i++) {
-            const lerpAmt = map(i, 0, midBins, 0, 1)
-            const amp = mids[i]
-            const ampR = map(amp, 0, 255, 10, r)
-            noStroke()
-            fill(lerpColor(fromCol, toCol, lerpAmt))
-            circle(x, y, ampR)
+            const a = map(i, 0, midBins, 0, 360)
+            const ampD = map(mids[i], 0, 255, r / 2, r * 2)
+
+            const px = sin(a) * ampD
+            const py = cos(a) * ampD
+            vertex(px, py)
         }
+        endShape()
+
+        pop()
     }
 }
