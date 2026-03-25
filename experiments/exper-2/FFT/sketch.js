@@ -22,10 +22,15 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(600, 400);
+  angleMode(DEGREES)
 
   colours = {
-    green: color(0, 175, 0)
+    grey: color(50),
+    green: color(0, 175, 0),
+    purple: color(105, 20, 170),
+    pink: color(200, 20, 195),
+    orange: color(230, 180, 50)
   }
 
   song.play();
@@ -35,7 +40,7 @@ function setup() {
 }
 
 function draw() {
-  background(50);
+  background(colours.grey);
 
   const spectrum = fft.analyze()
   const frame = new AudioFrame(spectrum)
@@ -46,5 +51,6 @@ function draw() {
     text("Paused", 10, 20);
   }
 
-  frame.showFullSpectrum(0, 0, width, height, colours.green)
+  frame.showFullSpectrum(0, 0, width, height)
+  frame.showLows(width, 0, width, height/3, 90)
 }
