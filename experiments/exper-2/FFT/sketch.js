@@ -56,4 +56,7 @@ function draw() {
   frame.showFullSpectrum(0, height/2, width, height/2)
   frame.showLows(width, 0, width, height/3, 90)
   frame.showMids(width / 4, height / 4, 50)
+
+  // todo
+  // make timeline
 }
