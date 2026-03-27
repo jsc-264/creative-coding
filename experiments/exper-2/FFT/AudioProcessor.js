@@ -1,12 +1,43 @@
-class AudioFrame {
-    constructor(spectrum) {
-        this.spectrum = spectrum
+class AudioProcessor {
+    constructor(song){
+        this.song = song
+
+        this.fft = new p5.FFT(0.75, 512);
+        this.fft.setInput(song)
+
+        this.volumeTimeline = []
+    }
+
+    getCurrentVolume(){
+        const freqRanges = ["bass", "lowMid", "mid", "highMid", "treble"]
+        let vol = 0
+
+        for (let range of freqRanges) {
+            const rangeVol = this.fft.getEnergy(range)
+            vol += rangeVol
+        }
+
+        vol /= freqRanges.length
+
+        return vol
+    }
+
+    analyseData(MAX_VOL_TIMELINE_LEN = 100){
+        this.spectrum = this.fft.analyze()
         this.bins = this.spectrum.length
 
-        this.levels = {
+        this.spectrumLevels = {
             lows: this.spectrum.slice(0, this.bins / 3),
             mids: this.spectrum.slice(this.bins / 3, 2 * this.bins / 3),
             highs: this.spectrum.slice(this.bins - 5)
+        }
+
+        this.CurrentVolume = this.getCurrentVolume();
+
+        this.volumeTimeline.push(this.CurrentVolume)
+
+        if (this.volumeTimeline.length > MAX_VOL_TIMELINE_LEN) {
+            this.volumeTimeline.shift()
         }
     }
 
@@ -28,7 +59,7 @@ class AudioFrame {
     }
 
     showLows(x, y, w, h, angle, col = colours.pink) {
-        const lows = this.levels.lows
+        const lows = this.spectrumLevels.lows
         const lowBins = lows.length
         const ampW = w / lowBins
 
@@ -65,7 +96,7 @@ class AudioFrame {
     }
 
     showMids(x, y, r, col = colours.purple) {
-        const mids = this.levels.lows
+        const mids = this.spectrumLevels.lows
 
         push()
         translate(x, y)
@@ -74,7 +105,7 @@ class AudioFrame {
         stroke(col)
         strokeWeight(3)
         for (let i = 1; i <= 3; i++) {
-            this.radial(mids, r * i/2)
+            this.radial(mids, r * i / 2)
         }
 
         pop()

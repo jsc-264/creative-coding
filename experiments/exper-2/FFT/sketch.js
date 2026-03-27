@@ -1,5 +1,5 @@
 let song;
-let fft;
+let processor;
 let paused = false;
 let colours = {}
 
@@ -34,9 +34,7 @@ function setup() {
   }
 
   song.play();
-
-  fft = new p5.FFT(0.75, 512);
-  fft.setInput(song)
+  processor = new AudioProcessor(song)
 }
 
 let vols = []
@@ -44,19 +42,15 @@ let vols = []
 function draw() {
   background(colours.grey);
 
-  const spectrum = fft.analyze()
-  const frame = new AudioFrame(spectrum)
-
   if (song.isPlaying()) {
     text("Playing", 10, 20);
   } else {
     text("Paused", 10, 20);
   }
 
-  frame.showFullSpectrum(0, height/2, width, height/2)
-  frame.showLows(width, 0, width, height/3, 90)
-  frame.showMids(width / 4, height / 4, 50)
+  processor.analyseData()
 
-  // todo
-  // make timeline
+  processor.showFullSpectrum(0, height/2, width, height/2)
+  processor.showLows(width, 0, width, height/3, 90)
+  processor.showMids(width / 4, height / 4, 50)
 }
