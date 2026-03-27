@@ -91,6 +91,7 @@ class AudioProcessor {
 
             const px = sin(a) * ampD
             const py = cos(a) * ampD
+
             vertex(px, py)
         }
         endShape()
@@ -98,6 +99,7 @@ class AudioProcessor {
 
     showMids(x, y, r, col = colours.purple) {
         const mids = this.spectrumLevels.lows
+        const numRadials = 5
 
         push()
         translate(x, y)
@@ -105,8 +107,8 @@ class AudioProcessor {
         noFill()
         stroke(col)
         strokeWeight(3)
-        for (let i = 1; i <= 3; i++) {
-            this.radial(mids, r * i / 2)
+        for (let i = 1; i <= numRadials; i++) {
+            this.radial(mids, r * i / numRadials)
         }
 
         pop()

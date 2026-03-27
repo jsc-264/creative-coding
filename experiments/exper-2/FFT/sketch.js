@@ -2,6 +2,7 @@ let song;
 let processor;
 let paused = false;
 let colours = {}
+const MOUSE_DISTANCE = 40
 
 function keyPressed() {
   if (key == " ") {
