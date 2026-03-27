@@ -6,7 +6,7 @@ class AudioProcessor {
         this.fft.setInput(song)
 
         this.maxVolumeTimelineLength = 200
-        this.volumeTimeline = []
+        this.volumeTimeline = new Array(this.maxVolumeTimelineLength).fill(0)
     }
 
     getCurrentVolume(){
@@ -83,14 +83,14 @@ class AudioProcessor {
         pop()
     }
 
-    radial(level, r) {
+    radial(level, r, a) {
         beginShape()
         for (let i = 0; i < level.length; i++) {
-            const a = map(i, 0, level.length, 0, 360)
+            const angle = map(i, 0, level.length, 0, 360) + a
             const ampD = map(level[i], 0, 255, r / 4, r * 2)
 
-            const px = sin(a) * ampD
-            const py = cos(a) * ampD
+            const px = sin(angle) * ampD
+            const py = cos(angle) * ampD
 
             vertex(px, py)
         }
@@ -99,16 +99,16 @@ class AudioProcessor {
 
     showMids(x, y, r, col = colours.purple) {
         const mids = this.spectrumLevels.lows
-        const numRadials = 5
+        const numRadials = 3
 
         push()
         translate(x, y)
 
         noFill()
         stroke(col)
-        strokeWeight(3)
+        strokeWeight(map(numRadials, 2, 10, 5, 1))
         for (let i = 1; i <= numRadials; i++) {
-            this.radial(mids, r * i / numRadials)
+            this.radial(mids, r * i / numRadials, i*360/numRadials)
         }
 
         pop()
