@@ -1,8 +1,8 @@
 class AudioProcessor {
-    constructor(song){
+    constructor(song, smoothing = 0.9, bins = 512){
         this.song = song
 
-        this.fft = new p5.FFT(0.75, 512);
+        this.fft = new p5.FFT(smoothing, bins);
         this.fft.setInput(song)
 
         this.maxVolumeTimelineLength = 200
@@ -112,7 +112,7 @@ class AudioProcessor {
         pop()
     }
 
-    showVolumeTimeline(x, y, w, h, col = colours.green){
+    showVolumeTimeline(x, y, w, h, col = colours.orange){
         const ampW = w / this.volumeTimeline.length
 
         push()
