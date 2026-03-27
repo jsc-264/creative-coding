@@ -5,6 +5,7 @@ class AudioProcessor {
         this.fft = new p5.FFT(0.75, 512);
         this.fft.setInput(song)
 
+        this.maxVolumeTimelineLength = 200
         this.volumeTimeline = []
     }
 
@@ -22,7 +23,7 @@ class AudioProcessor {
         return vol
     }
 
-    analyseData(MAX_VOL_TIMELINE_LEN = 100){
+    analyseData(){
         this.spectrum = this.fft.analyze()
         this.bins = this.spectrum.length
 
@@ -36,7 +37,7 @@ class AudioProcessor {
 
         this.volumeTimeline.push(this.CurrentVolume)
 
-        if (this.volumeTimeline.length > MAX_VOL_TIMELINE_LEN) {
+        if (this.volumeTimeline.length > this.maxVolumeTimelineLength) {
             this.volumeTimeline.shift()
         }
     }
@@ -107,6 +108,28 @@ class AudioProcessor {
         for (let i = 1; i <= 3; i++) {
             this.radial(mids, r * i / 2)
         }
+
+        pop()
+    }
+
+    showVolumeTimeline(x, y, w, h, col = colours.green){
+        const ampW = w / this.volumeTimeline.length
+
+        push()
+        translate(x, y)
+
+        strokeWeight(3)
+        stroke(col)
+        noFill()
+        beginShape()
+        for (let i = 0; i < this.volumeTimeline.length; i++){
+            const ampX = ampW * i
+            const ampY = map(this.volumeTimeline[i], 0, 255, h, 0)
+
+            vertex(ampX, ampY)
+        }
+
+        endShape()
 
         pop()
     }

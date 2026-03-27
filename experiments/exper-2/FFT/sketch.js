@@ -50,7 +50,8 @@ function draw() {
 
   processor.analyseData()
 
-  processor.showFullSpectrum(0, height/2, width, height/2)
+  // processor.showFullSpectrum(0, height/2, width, height/2)
   processor.showLows(width, 0, width, height/3, 90)
   processor.showMids(width / 4, height / 4, 50)
+  processor.showVolumeTimeline(0, height / 2, width/2, height / 2)
 }
