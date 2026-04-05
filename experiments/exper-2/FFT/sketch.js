@@ -1,3 +1,4 @@
+let playlist = [];
 let song;
 let processor;
 let paused = false;
@@ -18,12 +19,17 @@ function keyPressed() {
 }
 
 function preload() {
-  song = loadSound("./song.mp3");
+  playlist.push(loadSound("./music/lucy-in-the-sky-with-diamonds.mp3"))
+  playlist.push(loadSound("./music/thank-you-falettinme-be-mice-elf-agin.mp3"))
+  playlist.push(loadSound("./music/the-night-we-met.mp3"))
+  playlist.push(loadSound("./music/von-dutch.mp3"))
 }
 
 function setup() {
   createCanvas(500, 500);
   angleMode(DEGREES)
+
+  console.log(playlist)
 
   colours = {
     grey: color(50),
@@ -33,6 +39,7 @@ function setup() {
     orange: color(230, 180, 50),
   }
 
+  song = playlist[0]
   song.play();
   processor = new AudioProcessor(song)
 }
