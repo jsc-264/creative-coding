@@ -17,10 +17,19 @@ function keyPressed() {
     }
   }
 
-  if (keyCode == RIGHT_ARROW){
+  if (keyCode == RIGHT_ARROW) {
     const index = playlist.indexOf(song)
     song.stop()
     const newIndex = index < playlist.length - 1 ? index + 1 : 0
+    song = playlist[newIndex]
+    song.play()
+    processor = new AudioProcessor(song)
+  }
+
+  if (keyCode == LEFT_ARROW) {
+    const index = playlist.indexOf(song)
+    song.stop()
+    const newIndex = index > 0 ? index - 1 : playlist.length - 1
     song = playlist[newIndex]
     song.play()
     processor = new AudioProcessor(song)
@@ -64,8 +73,8 @@ function draw() {
 
   processor.analyseData()
 
-  processor.showFullSpectrum(0, 3*height/4, width, height/4)
-  processor.showLows(width, 0, width, height/3, 90)
-  processor.showMids(width / 4, height / 4, width/3)
+  processor.showFullSpectrum(0, 3 * height / 4, width, height / 4)
+  processor.showLows(width, 0, width, height / 3, 90)
+  processor.showMids(width / 4, height / 4, width / 3)
   processor.showVolumeTimeline(0, height / 2, width, height / 2)
 }
