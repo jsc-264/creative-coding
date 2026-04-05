@@ -16,6 +16,15 @@ function keyPressed() {
       loop()
     }
   }
+
+  if (keyCode == RIGHT_ARROW){
+    const index = playlist.indexOf(song)
+    song.stop()
+    const newIndex = index < playlist.length - 1 ? index + 1 : 0
+    song = playlist[newIndex]
+    song.play()
+    processor = new AudioProcessor(song)
+  }
 }
 
 function preload() {
@@ -28,8 +37,6 @@ function preload() {
 function setup() {
   createCanvas(500, 500);
   angleMode(DEGREES)
-
-  console.log(playlist)
 
   colours = {
     grey: color(50),
