@@ -4,6 +4,18 @@ let processor;
 let paused = false;
 let colours = {}
 
+function pauseIcon() {
+  const w = 50
+  push()
+  translate(width / 2, height / 2)
+
+  fill(colours.white)
+  noStroke()
+  rect(-w / 2, -w / 2, w / 3, w)
+  rect(w / 2 - w / 3, -w / 2, w / 3, w)
+  pop()
+}
+
 function keyPressed() {
   if (key == " ") {
     paused = !paused
@@ -53,6 +65,7 @@ function setup() {
     purple: color(105, 20, 170),
     pink: color(200, 20, 195),
     orange: color(230, 180, 50),
+    white: color(230)
   }
 
   song = playlist[0]
@@ -65,16 +78,14 @@ let vols = []
 function draw() {
   background(colours.grey);
 
-  if (song.isPlaying()) {
-    text("Playing", 10, 20);
-  } else {
-    text("Paused", 10, 20);
-  }
-
   processor.analyseData()
 
   processor.showFullSpectrum(0, 3 * height / 4, width, height / 4)
   processor.showLows(width, 0, width, height / 3, 90)
   processor.showMids(width / 4, height / 4, width / 3)
   processor.showVolumeTimeline(0, height / 2, width, height / 2)
+
+  if (!song.isPlaying()) {
+    pauseIcon()
+  }
 }
