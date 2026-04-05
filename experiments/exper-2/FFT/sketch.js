@@ -11,8 +11,8 @@ function pauseIcon() {
 
   fill(colours.white)
   noStroke()
-  rect(-w / 2, -w / 2, w / 3, w)
-  rect(w / 2 - w / 3, -w / 2, w / 3, w)
+  rect(-w / 2, -w / 2, w / 4, w)
+  rect(w / 2 - w / 4, -w / 2, w / 4, w)
   pop()
 }
 
