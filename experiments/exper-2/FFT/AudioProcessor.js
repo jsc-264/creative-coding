@@ -134,7 +134,10 @@ class AudioProcessor {
         translate(x, y)
 
         strokeWeight(3)
-        stroke(col)
+
+        const hu = (hue(col) + map(mouseY, 0, height, 0, 360)) % 360
+        const newCol = color(hu, saturation(col), brightness(col))
+        stroke(newCol)
         noFill()
         beginShape()
         for (let i = 0; i < this.volumeTimeline.length; i++) {
