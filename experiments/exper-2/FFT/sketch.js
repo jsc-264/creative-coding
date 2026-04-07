@@ -39,10 +39,10 @@ let vols = []
 function draw() {
   colours = {
     bg: color(0, 0, 40),
-    fullSpectrum: color((hu + 120) % 360, 100, 75),
-    mids: color((hu + 300) % 360, 100, 75),
-    lows: color((hu + 240) % 360, 100, 75),
-    volumeTimeline: color((hu + 30) % 360, 100, 75),
+    fullSpectrum: color((hu + 12) % 360, 100, 75),
+    mids: color((hu + 30) % 360, 100, 75),
+    lows: color((hu + 24) % 360, 100, 75),
+    volumeTimeline: color((hu + 3) % 360, 100, 75),
   }
 
   background(colours.bg);
@@ -60,5 +60,5 @@ function draw() {
   processor.showMids(width / 4, height / 4, width / 3, colours.mids)
   processor.showVolumeTimeline(0, height / 2, width, height / 2, colours.volumeTimeline)
 
-  hu = map(processor.currentVolume, 0, 255, 0, 90)
+  hu = map(processor.currentVolume, 0, 255, 0, 360)
 }

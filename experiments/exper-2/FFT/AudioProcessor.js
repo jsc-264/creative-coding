@@ -1,5 +1,5 @@
 class AudioProcessor {
-    constructor(song, smoothing = 0.95, bins = 512){
+    constructor(song, smoothing = 0.95, bins = 512) {
         this.fft = new p5.FFT(smoothing, bins);
         this.fft.setInput(song)
 
@@ -7,7 +7,7 @@ class AudioProcessor {
         this.volumeTimeline = new Array(this.maxVolumeTimelineLength).fill(0)
     }
 
-    getCurrentVolume(){
+    getCurrentVolume() {
         const freqRanges = ["bass", "lowMid", "mid", "highMid", "treble"]
         let vol = 0
 
@@ -21,7 +21,7 @@ class AudioProcessor {
         return vol
     }
 
-    analyseData(){
+    analyseData() {
         this.spectrum = this.fft.analyze()
         this.bins = this.spectrum.length
 
@@ -45,13 +45,19 @@ class AudioProcessor {
 
         push()
         translate(x, y)
-
+        noStroke()
         for (let i = 0; i < this.bins; i++) {
             const amp = this.spectrum[i];
             const ampX = ampW * i
             const ampY = map(amp, 0, 256, h, 0);
-            noStroke()
+
             fill(col)
+
+            if (dist(mouseX - x, mouseY - y, ampX, ampY) < 50) {
+                const hu = (hue(col) + 100) % 360
+                fill(hu, saturation(col), brightness(col))
+            }
+
             rect(ampX, ampY, ampW, h - ampY);
         }
         pop()
@@ -103,16 +109,16 @@ class AudioProcessor {
         translate(x, y)
 
         noFill()
-        stroke(col)
         strokeWeight(map(numRadials, 2, 10, 5, 1))
         for (let i = 1; i <= numRadials; i++) {
-            this.radial(mids, r * i / numRadials, i*360/numRadials)
+            stroke(col)
+            this.radial(mids, r * i / numRadials, i * 360 / numRadials)
         }
 
         pop()
     }
 
-    showVolumeTimeline(x, y, w, h, col){
+    showVolumeTimeline(x, y, w, h, col) {
         const ampW = w / this.volumeTimeline.length
 
         push()
@@ -122,7 +128,7 @@ class AudioProcessor {
         stroke(col)
         noFill()
         beginShape()
-        for (let i = 0; i < this.volumeTimeline.length; i++){
+        for (let i = 0; i < this.volumeTimeline.length; i++) {
             const ampX = ampW * i
             const ampY = map(this.volumeTimeline[i], 0, 255, h, 0)
 
