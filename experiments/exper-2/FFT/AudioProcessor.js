@@ -1,3 +1,5 @@
+
+
 class AudioProcessor {
     constructor(song, smoothing = 0.95, bins = 512) {
         this.fft = new p5.FFT(smoothing, bins);
@@ -87,8 +89,10 @@ class AudioProcessor {
         pop()
     }
 
-    radial(level, r, a) {
-        beginShape()
+    radial(level, r, a, x, y, col) {
+        const newHue = (hue(col) + 180) % 360
+        const newCol = color(newHue, saturation(col), brightness(col))
+
         for (let i = 0; i < level.length; i++) {
             const angle = map(i, 0, level.length, 0, 360) + a
             const ampD = map(level[i], 0, 255, r / 4, r * 2)
@@ -96,23 +100,28 @@ class AudioProcessor {
             const px = sin(angle) * ampD
             const py = cos(angle) * ampD
 
-            vertex(px, py)
+            stroke(col)
+
+            if (dist(mouseX-x, mouseY-y, px, py) < 50) {
+                stroke(newCol)
+            }
+
+            line(0, 0, px, py)
+
         }
-        endShape()
     }
 
     showMids(x, y, r, col) {
         const mids = this.spectrumLevels.lows
-        const numRadials = 3
+        const numRadials = 2
 
         push()
         translate(x, y)
 
         noFill()
-        strokeWeight(map(numRadials, 2, 10, 5, 1))
+        strokeWeight(1.5)
         for (let i = 1; i <= numRadials; i++) {
-            stroke(col)
-            this.radial(mids, r * i / numRadials, i * 360 / numRadials)
+            this.radial(mids, r * i / numRadials, i * 360 / numRadials, x, y, col)
         }
 
         pop()
