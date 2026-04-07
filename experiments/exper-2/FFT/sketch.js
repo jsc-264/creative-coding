@@ -2,6 +2,10 @@ let song;
 let processor;
 let paused = false;
 let colours = {}
+let hu = 0
+let hues = [
+  0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330
+]
 
 function keyPressed() {
   if (key == " ") {
@@ -24,6 +28,7 @@ function preload() {
 function setup() {
   createCanvas(500, 500);
   angleMode(DEGREES)
+  colorMode(HSB)
 
   song.play();
   processor = new AudioProcessor(song)
@@ -33,11 +38,11 @@ let vols = []
 
 function draw() {
   colours = {
-    bg: color(50),
-    fullSpectrum: color(0, 175, 0, 200),
-    mids: color(105, 20, 170),
-    lows: color(200, 20, 195),
-    volumeTimeline: color(230, 180, 50),
+    bg: color(0, 0, 40),
+    fullSpectrum: color((hu + 120) % 360, 100, 75),
+    mids: color((hu + 300) % 360, 100, 75),
+    lows: color((hu + 240) % 360, 100, 75),
+    volumeTimeline: color((hu + 30) % 360, 100, 75),
   }
 
   background(colours.bg);
@@ -54,4 +59,6 @@ function draw() {
   processor.showLows(width, 0, width, height / 3, 90, colours.lows)
   processor.showMids(width / 4, height / 4, width / 3, colours.mids)
   processor.showVolumeTimeline(0, height / 2, width, height / 2, colours.volumeTimeline)
+
+  hu = map(processor.currentVolume, 0, 255, 0, 90)
 }

@@ -1,7 +1,5 @@
 class AudioProcessor {
-    constructor(song, smoothing = 0.9, bins = 512){
-        this.song = song
-
+    constructor(song, smoothing = 0.95, bins = 512){
         this.fft = new p5.FFT(smoothing, bins);
         this.fft.setInput(song)
 
@@ -33,9 +31,9 @@ class AudioProcessor {
             highs: this.spectrum.slice(this.bins - 5)
         }
 
-        this.CurrentVolume = this.getCurrentVolume();
+        this.currentVolume = this.getCurrentVolume();
 
-        this.volumeTimeline.push(this.CurrentVolume)
+        this.volumeTimeline.push(this.currentVolume)
 
         if (this.volumeTimeline.length > this.maxVolumeTimelineLength) {
             this.volumeTimeline.shift()
