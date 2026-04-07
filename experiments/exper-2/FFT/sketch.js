@@ -25,14 +25,6 @@ function setup() {
   createCanvas(500, 500);
   angleMode(DEGREES)
 
-  colours = {
-    grey: color(50),
-    green: color(0, 175, 0, 200),
-    purple: color(105, 20, 170),
-    pink: color(200, 20, 195),
-    orange: color(230, 180, 50),
-  }
-
   song.play();
   processor = new AudioProcessor(song)
 }
@@ -40,7 +32,15 @@ function setup() {
 let vols = []
 
 function draw() {
-  background(colours.grey);
+  colours = {
+    bg: color(50),
+    fullSpectrum: color(0, 175, 0, 200),
+    mids: color(105, 20, 170),
+    lows: color(200, 20, 195),
+    volumeTimeline: color(230, 180, 50),
+  }
+
+  background(colours.bg);
 
   if (song.isPlaying()) {
     text("Playing", 10, 20);
@@ -50,8 +50,8 @@ function draw() {
 
   processor.analyseData()
 
-  processor.showFullSpectrum(0, 3*height/4, width, height/4)
-  processor.showLows(width, 0, width, height/3, 90)
-  processor.showMids(width / 4, height / 4, width/3)
-  processor.showVolumeTimeline(0, height / 2, width, height / 2)
+  processor.showFullSpectrum(0, 3 * height / 4, width, height / 4, colours.fullSpectrum)
+  processor.showLows(width, 0, width, height / 3, 90, colours.lows)
+  processor.showMids(width / 4, height / 4, width / 3, colours.mids)
+  processor.showVolumeTimeline(0, height / 2, width, height / 2, colours.volumeTimeline)
 }

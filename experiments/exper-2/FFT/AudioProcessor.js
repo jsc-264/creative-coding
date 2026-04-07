@@ -42,7 +42,7 @@ class AudioProcessor {
         }
     }
 
-    showFullSpectrum(x, y, w, h, col = colours.green) {
+    showFullSpectrum(x, y, w, h, col) {
         const ampW = w / this.bins
 
         push()
@@ -59,7 +59,7 @@ class AudioProcessor {
         pop()
     }
 
-    showLows(x, y, w, h, angle, col = colours.pink) {
+    showLows(x, y, w, h, angle, col) {
         const lows = this.spectrumLevels.lows
         const lowBins = lows.length
         const ampW = w / lowBins
@@ -97,7 +97,7 @@ class AudioProcessor {
         endShape()
     }
 
-    showMids(x, y, r, col = colours.purple) {
+    showMids(x, y, r, col) {
         const mids = this.spectrumLevels.lows
         const numRadials = 3
 
@@ -114,7 +114,7 @@ class AudioProcessor {
         pop()
     }
 
-    showVolumeTimeline(x, y, w, h, col = colours.orange){
+    showVolumeTimeline(x, y, w, h, col){
         const ampW = w / this.volumeTimeline.length
 
         push()
