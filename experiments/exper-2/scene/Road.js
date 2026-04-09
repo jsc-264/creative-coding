@@ -5,20 +5,17 @@ class Road {
         this.w = width
         this.h = height - y
 
-        this.concreteColour = color(50)
-        this.paintColour = color(224, 172, 29)
-
-        this.stripe = new Stripe(0, this.y + 10, this.w / 3, 10, this.paintColour)
+        this.stripe = new Stripe(0, this.y + 10, this.w / 3, 10)
     }
 
     render() {
-        fill(this.concreteColour)
+        fill(50)
         rect(this.x, this.y, this.w, this.h)
 
         this.stripe.render()
     }
 
     update() {
-        this.stripe.move()
+        this.stripe.update()
     }
 }

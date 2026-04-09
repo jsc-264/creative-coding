@@ -1,19 +1,17 @@
 class Stripe {
-    constructor(x, y, w, h, col){
+    constructor(x, y, w, h){
         this.x = x
         this.y = y
         this.w = w
         this.h = h
-
-        this.col = col
     }
 
     render() {
-        fill(this.col)
+        fill(224, 172, 29)
         rect(this.x, this.y, this.w, this.h)
     }
 
-    move() {
+    update() {
         this.x -= XVEL
 
         if (this.x < -this.w){
