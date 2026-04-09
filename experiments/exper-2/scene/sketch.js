@@ -1,4 +1,4 @@
-const XVEL = 5
+const XVEL = 10
 let road
 
 function setup() {
@@ -8,6 +8,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(125, 193, 219);
+  road.update()
   road.render()
 }

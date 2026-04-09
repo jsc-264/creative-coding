@@ -11,6 +11,13 @@ class Stripe {
     render() {
         fill(this.col)
         rect(this.x, this.y, this.w, this.h)
+    }
 
+    move() {
+        this.x -= XVEL
+
+        if (this.x < -this.w){
+            this.x = width + this.w /2 - 10
+        }
     }
 }
