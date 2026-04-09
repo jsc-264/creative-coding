@@ -31,7 +31,7 @@ class Skyscraper {
     }
 
     update() {
-        this.x -= XVEL / 5
+        this.x -= XVEL / 20
 
         if (this.x < -this.w) {
             this.x = random(width, 2*width)
