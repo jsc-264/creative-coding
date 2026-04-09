@@ -7,7 +7,7 @@ class Stripe {
     }
 
     render() {
-        fill(224, 172, 29)
+        fill(45, 88, 88)
         rect(this.x, this.y, this.w, this.h)
     }
 

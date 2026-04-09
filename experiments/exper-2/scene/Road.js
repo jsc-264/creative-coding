@@ -9,7 +9,7 @@ class Road {
     }
 
     render() {
-        fill(50)
+        fill(10)
         rect(this.x, this.y, this.w, this.h)
 
         this.stripe.render()
