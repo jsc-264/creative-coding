@@ -1,11 +1,12 @@
-let flockSize = 2
+let flockSize = 100
 let flock = []
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  flock.push(new Bird(50, height/2, createVector(1, 0)))
-  flock.push(new Bird(width/2, height-50, createVector(0, -1)))
+  for (let i = 0; i< flockSize; i++){
+    flock.push(new Bird(random(width), random(height)))
+  }
 
 }
 
@@ -21,22 +22,27 @@ function draw() {
 class Bird {
   constructor(x, y, vel) {
     this.pos = createVector(x, y)
-    this.vel = vel
+    this.vel = vel || p5.Vector.random2D()
     this.diam = 20
   }
 
   render() {
-    circle(this.pos.x, this.pos.y, this.diam)
-    line(this.pos.x, this.pos.y, this.pos.x + this.vel.x * this.diam, this.pos.y + this.vel.y * this.diam)
+    push()
+    translate(this.pos.x, this.pos.y)
+    circle(0, 0, this.diam)
+
+    const mag = this.diam/2
+    line(0, 0, this.vel.x*mag, this.vel.y*mag)
+    pop()
   }
 
   update() {
     this.pos.add(this.vel)
 
     if (this.pos.x < -this.diam) this.pos.x = width + this.diam
-    if (this.pos.x > width + this.diam) this.pos.x = this.diam
+    if (this.pos.x > width + this.diam) this.pos.x = -this.diam
     if (this.pos.y < -this.diam) this.pos.y = height + this.diam
-    if (this.pos.y > height + this.diam) this.pos.y = this.diam
+    if (this.pos.y > height + this.diam) this.pos.y = -this.diam
   }
 
   flock(flock) {
@@ -46,8 +52,7 @@ class Bird {
       }
 
       let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
-      if (d < 50) {
-        // line(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
+      if (d < (this.diam/2 + bird.diam/2) + 10) {
 
         const thisNormVec = p5.Vector.normalize(this.vel)
         const birdNormVec = p5.Vector.normalize(bird.vel)
