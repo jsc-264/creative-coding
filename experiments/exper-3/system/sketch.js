@@ -1,11 +1,12 @@
-let flockSize = 10
+let flockSize = 2
 let flock = []
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < flockSize; i++) {
-    flock.push(new Bird(random(width), random(height)))
-  }
+
+  flock.push(new Bird(50, height/2, createVector(1, 0)))
+  flock.push(new Bird(width/2, height-50, createVector(0, -1)))
+
 }
 
 function draw() {
@@ -18,9 +19,9 @@ function draw() {
 }
 
 class Bird {
-  constructor(x, y) {
+  constructor(x, y, vel) {
     this.pos = createVector(x, y)
-    this.vel = p5.Vector.random2D()
+    this.vel = vel
     this.diam = 20
   }
 
@@ -45,8 +46,16 @@ class Bird {
       }
 
       let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
-      if (d < 200) {
-        line(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
+      if (d < 50) {
+        // line(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
+
+        const thisNormVec = p5.Vector.normalize(this.vel)
+        const birdNormVec = p5.Vector.normalize(bird.vel)
+
+        const avgVec = thisNormVec.add(birdNormVec).normalize()
+
+        this.vel = avgVec
+        bird.vel = avgVec
       }
     }
   }
