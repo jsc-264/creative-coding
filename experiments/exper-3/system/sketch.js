@@ -8,6 +8,7 @@ function setup() {
 
 function draw() {
   background(135, 206, 235);
+  b.update()
   b.render()
 }
 
@@ -16,10 +17,11 @@ class Bird {
     this.pos = createVector(x, y)
     this.dir = dir
 
-    this.vel = createVector(0, 0)
-    this.acc = createVector(0, 0)
+    this.vel = createVector(0, -1)
+    this.acc = createVector(0, -0.1)
 
     this.size = 10
+    this.maxSpeed = 4
   }
 
   render() {
@@ -33,5 +35,12 @@ class Bird {
       0, -this.size*2
     )
     pop()
+  }
+
+  update() {
+    this.vel.add(this.acc)
+    this.pos.add(this.vel)
+
+    this.vel.limit(this.maxSpeed)
   }
 }
