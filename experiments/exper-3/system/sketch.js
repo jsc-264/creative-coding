@@ -31,6 +31,11 @@ class Bird {
 
   update() {
     this.pos.add(this.vel)
+
+    if (this.pos.x < -this.diam) this.pos.x = width + this.diam
+    if (this.pos.x > width + this.diam) this.pos.x = this.diam
+    if (this.pos.y < -this.diam) this.pos.y = height + this.diam
+    if (this.pos.y > height + this.diam) this.pos.y = this.diam
   }
 
   flock(flock) {
