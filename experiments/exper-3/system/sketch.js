@@ -3,9 +3,10 @@ let flock = []
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES)
 
   for (let i = 0; i< flockSize; i++){
-    flock.push(new Bird(random(width), random(height)))
+    flock.push(new Bird(random(width), random(height), random(10, 30)))
   }
 
 }
@@ -20,10 +21,10 @@ function draw() {
 }
 
 class Bird {
-  constructor(x, y, vel) {
+  constructor(x, y, diam) {
     this.pos = createVector(x, y)
-    this.vel = vel || p5.Vector.random2D()
-    this.diam = 20
+    this.vel = p5.Vector.random2D()
+    this.diam = diam
   }
 
   render() {
