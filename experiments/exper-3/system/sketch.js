@@ -1,10 +1,14 @@
+let b
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES)
+  b = new Bird(width/2, height-100, 0)
 }
 
 function draw() {
   background(135, 206, 235);
+  b.render()
 }
 
 class Bird {
@@ -26,7 +30,7 @@ class Bird {
     triangle(
       -this.size, this.size,
       this.size, this.size,
-      0, this.size
+      0, -this.size*2
     )
     pop()
   }
