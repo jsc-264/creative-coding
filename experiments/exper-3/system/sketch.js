@@ -20,6 +20,15 @@ function draw() {
   })
 }
 
+function averageAngle(bird1, bird2){
+  const thisNormVec = p5.Vector.normalize(bird1.vel)
+  const birdNormVec = p5.Vector.normalize(bird2.vel)
+
+  const avgVec = thisNormVec.add(birdNormVec).normalize()
+
+  return avgVec
+}
+
 class Bird {
   constructor(x, y, size) {
     this.pos = createVector(x, y)
@@ -51,7 +60,10 @@ class Bird {
   }
 
   flock(flock) {
-    const angleMax = 100
+    // max angle that two birds can be meeting at and they still change direction
+    // 180 = two birds will always turn if near each other
+    // 0 = two birds will never turn if near each other
+    const angleMax = 145
 
     for (let bird of flock) {
       if (bird == this) {
@@ -63,14 +75,7 @@ class Bird {
       const angleDifference = this.vel.angleBetween(bird.vel)
       const similarDirection = angleDifference < angleMax && angleDifference > -angleMax
       if (closeEnough && similarDirection) {
-
-        const thisNormVec = p5.Vector.normalize(this.vel)
-        const birdNormVec = p5.Vector.normalize(bird.vel)
-
-        const avgVec = thisNormVec.add(birdNormVec).normalize()
-
-        this.vel = avgVec
-        bird.vel = avgVec
+        this.vel = averageAngle(this, bird)
       }
     }
   }
