@@ -23,7 +23,7 @@ function draw() {
 class Bird {
   constructor(x, y, size) {
     this.pos = createVector(x, y)
-    this.vel = createVector(random(-1, 1), random(-1, 1))
+    this.vel = createVector(random(-1, 1), random(-1, 1)).setMag(1)
     this.size = size
   }
 
@@ -51,13 +51,18 @@ class Bird {
   }
 
   flock(flock) {
+    const angleMax = 100
+
     for (let bird of flock) {
       if (bird == this) {
         continue
       }
 
       let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
-      if (d < (this.size/2 + bird.size/2) + 10) {
+      const closeEnough = d < (this.size / 2 + bird.size / 2) + 10
+      const angleDifference = this.vel.angleBetween(bird.vel)
+      const similarDirection = angleDifference < angleMax && angleDifference > -angleMax
+      if (closeEnough && similarDirection) {
 
         const thisNormVec = p5.Vector.normalize(this.vel)
         const birdNormVec = p5.Vector.normalize(bird.vel)
