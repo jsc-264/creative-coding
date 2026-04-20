@@ -6,7 +6,7 @@ function setup() {
   angleMode(DEGREES)
 
   for (let i = 0; i< flockSize; i++){
-    flock.push(new Bird(random(width), random(height), random(10, 30)))
+    flock.push(new Bird(random(width), random(height), random(5, 15)))
   }
 
 }
@@ -21,29 +21,33 @@ function draw() {
 }
 
 class Bird {
-  constructor(x, y, diam) {
+  constructor(x, y, size) {
     this.pos = createVector(x, y)
-    this.vel = p5.Vector.random2D()
-    this.diam = diam
+    this.vel = createVector(random(-1, 1), random(-1, 1))
+    this.size = size
   }
 
   render() {
     push()
     translate(this.pos.x, this.pos.y)
-    circle(0, 0, this.diam)
+    rotate(this.vel.heading())
 
-    const mag = this.diam/2
-    line(0, 0, this.vel.x*mag, this.vel.y*mag)
+    triangle(
+      this.size, 0,
+      -this.size, -this.size/2,
+      -this.size, this.size / 2,
+    )
+
     pop()
   }
 
   update() {
     this.pos.add(this.vel)
 
-    if (this.pos.x < -this.diam) this.pos.x = width + this.diam
-    if (this.pos.x > width + this.diam) this.pos.x = -this.diam
-    if (this.pos.y < -this.diam) this.pos.y = height + this.diam
-    if (this.pos.y > height + this.diam) this.pos.y = -this.diam
+    if (this.pos.x < -this.size) this.pos.x = width + this.size
+    if (this.pos.x > width + this.size) this.pos.x = -this.size
+    if (this.pos.y < -this.size) this.pos.y = height + this.size
+    if (this.pos.y > height + this.size) this.pos.y = -this.size
   }
 
   flock(flock) {
@@ -53,7 +57,7 @@ class Bird {
       }
 
       let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
-      if (d < (this.diam/2 + bird.diam/2) + 10) {
+      if (d < (this.size/2 + bird.size/2) + 10) {
 
         const thisNormVec = p5.Vector.normalize(this.vel)
         const birdNormVec = p5.Vector.normalize(bird.vel)
