@@ -34,6 +34,8 @@ class Bird {
     this.pos = createVector(x, y)
     this.vel = createVector(random(-1, 1), random(-1, 1)).setMag(1)
     this.size = size
+
+    this.col = color(random(20, 100), random(20, 100), random(10, 15))
   }
 
   render() {
@@ -41,6 +43,8 @@ class Bird {
     translate(this.pos.x, this.pos.y)
     rotate(this.vel.heading())
 
+    noStroke()
+    fill(this.col)
     triangle(
       this.size, 0,
       -this.size, -this.size/2,
@@ -74,6 +78,7 @@ class Bird {
       const closeEnough = d < (this.size / 2 + bird.size / 2) + 10
       const angleDifference = this.vel.angleBetween(bird.vel)
       const similarDirection = angleDifference < angleMax && angleDifference > -angleMax
+
       if (closeEnough && similarDirection) {
         this.vel = averageAngle(this, bird)
       }
