@@ -6,7 +6,7 @@ function setup() {
   angleMode(DEGREES)
 
   for (let i = 0; i < flockSize; i++) {
-    flock.push(new Bird(random(width), random(height), random(5, 15)))
+    flock.push(new Bird(random(width), random(height), floor(random(5, 15))))
   }
 
 }
@@ -36,7 +36,7 @@ class Bird {
     this.size = size
 
     this.speed = random(1, 2)
-    this.maxSpeed = map(this.size, 5, 15, 4, 2)
+    this.maxSpeed = map(this.size, 5, 15, 6, 1)
 
     this.col = color(random(20, 100), random(20, 100), random(10, 15))
   }
