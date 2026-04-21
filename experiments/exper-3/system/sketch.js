@@ -32,9 +32,11 @@ function averageAngle(bird1, bird2) {
 class Bird {
   constructor(x, y, size) {
     this.pos = createVector(x, y)
-    this.speed = random(1, 2)
     this.vel = createVector(random(-1, 1), random(-1, 1))
     this.size = size
+
+    this.speed = random(1, 2)
+    this.maxSpeed = map(this.size, 5, 15, 4, 2)
 
     this.col = color(random(20, 100), random(20, 100), random(10, 15))
   }
@@ -79,7 +81,7 @@ class Bird {
       }
 
       let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
-      const closeEnough = d < (this.size / 2 + bird.size / 2) + 10
+      const closeEnough = d < 20
       numClose += closeEnough ? 1 : 0
 
 
@@ -91,6 +93,6 @@ class Bird {
       }
     }
 
-    this.speed = map(numClose, 0, 10, 2, 0.1)
+    this.speed = map(numClose, 0, 5, this.maxSpeed, 1)
   }
 }
