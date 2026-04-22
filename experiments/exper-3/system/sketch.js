@@ -20,14 +20,13 @@ function draw() {
   })
 }
 
-// function averageAngle(bird1, bird2) {
-//   const thisNormVec = p5.Vector.normalize(bird1.vel)
-//   const birdNormVec = p5.Vector.normalize(bird2.vel)
-
-//   const avgVec = thisNormVec.add(birdNormVec).normalize()
-
-//   return avgVec
-// }
+function averageVectors(vectors) {
+  let sum = createVector()
+  for (let v of vectors) {
+    sum.add(p5.Vector.normalize(v))
+  }
+  return sum
+}
 
 class Bird {
   constructor(x, y, size) {
@@ -35,7 +34,7 @@ class Bird {
     this.vel = createVector(random(-1, 1), random(-1, 1))
     this.size = size
 
-    this.speed = random(5, 10)
+    this.speed = random(3, 5)
 
     this.col = color(random(20, 100), random(20, 100), random(10, 15))
   }
@@ -67,15 +66,41 @@ class Bird {
   }
 
   separate(flock) {
-    
+    const neighbourDistance = 20
+
+    const avgPos = createVector(0, 0)
+    let neighbours = 0
+    let separated = false
+
+    if (!separated) {
+      for (let bird of flock) {
+        const d = dist(this.pos.x, this.pos.y, bird.pos.x, bird.pos.y)
+        const birdCloseEnough = d < neighbourDistance
+
+        if (!birdCloseEnough) continue
+
+        neighbours++
+        avgPos.add(bird.pos)
+      }
+
+      if (neighbours > 0) {
+        avgPos.div(neighbours)
+      }
+
+      const awayVector = p5.Vector.sub(this.pos, avgPos)
+      const avgVector = averageVectors([awayVector, this.vel])
+
+      this.vel = avgVector
+      separated = true
+    }
   }
 
   align(flock) {
-    
+
   }
 
   cohere(flock) {
-    
+
   }
 
   flock(flock) {
@@ -85,7 +110,7 @@ class Bird {
     // 3) cohesion: close togther birds will attempt to travel to an average position of all of them
 
     this.separate(flock)
-    this.align(flock)
-    this.cohere(flock)
+    // this.align(flock)
+    // this.cohere(flock)
   }
 }
