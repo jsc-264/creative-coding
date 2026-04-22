@@ -67,36 +67,15 @@ class Bird {
   }
 
   separate(flock) {
-    for (let bird of flock) {
-      if (bird == this) continue
-
-      let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
-      const closeEnough = d < 20
-
-      if (closeEnough) {
-        let diff = p5.Vector.sub(this.pos, bird.pos);
-        diff.setMag(this.speed)
-        diff = p5.Vector.normalize(diff)
-        this.vel.add(diff)
-      }
-    }
+    
   }
 
   align(flock) {
-    let avgVel = createVector(0, 0)
-    for (let bird of flock){
-      if (bird == this) continue
+    
+  }
 
-      let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
-      const closeEnough = d < 20
-
-      if (closeEnough) {
-        avgVel.add(p5.Vector.normalize(bird.vel))
-      }
-    }
-
-    avgVel.setMag(this.speed)
-    this.vel = avgVel
+  cohere(flock) {
+    
   }
 
   flock(flock) {
@@ -107,6 +86,6 @@ class Bird {
 
     this.separate(flock)
     this.align(flock)
-    // this.cohere(flock)
+    this.cohere(flock)
   }
 }
