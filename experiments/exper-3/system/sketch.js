@@ -1,4 +1,4 @@
-let flockSize = 100
+let flockSize = 200
 let flock = []
 
 function setup() {
@@ -6,7 +6,7 @@ function setup() {
   angleMode(DEGREES)
 
   for (let i = 0; i < flockSize; i++) {
-    flock.push(new Bird(random(width), random(height), floor(random(5, 15))))
+    flock.push(new Bird(random(width), random(height), 10))
   }
 
 }
@@ -37,6 +37,10 @@ class Bird {
     this.speed = random(3, 5)
 
     this.col = color(random(20, 100), random(20, 100), random(10, 15))
+
+    this.separationDistance = 20
+    this.cohesionDistance = 100
+    this.alignmentDistance = 100
   }
 
   render() {
@@ -66,14 +70,12 @@ class Bird {
   }
 
   separate(flock) {
-    const neighbourDistance = 20
-
     const avgPos = createVector(0, 0)
     let neighbours = 0
 
     for (let bird of flock) {
       const d = dist(this.pos.x, this.pos.y, bird.pos.x, bird.pos.y)
-      const birdCloseEnough = d < neighbourDistance
+      const birdCloseEnough = d < this.separationDistance
 
       if (!birdCloseEnough) continue
 
@@ -92,14 +94,12 @@ class Bird {
   }
 
   align(flock) {
-    const neighbourDistance = 50
-
     let avgDir = 0
     let neighbours = 0
 
     for (let bird of flock) {
       const d = dist(this.pos.x, this.pos.y, bird.pos.x, bird.pos.y)
-      const birdCloseEnough = d < neighbourDistance
+      const birdCloseEnough = d < this.alignmentDistance
 
       if (!birdCloseEnough) continue
 
@@ -115,7 +115,27 @@ class Bird {
   }
 
   cohere(flock) {
+    let avgPos = createVector(0, 0)
+    let neighbours = 0
 
+    for (let bird of flock) {
+      const d = dist(this.pos.x, this.pos.y, bird.pos.x, bird.pos.y)
+      const birdCloseEnough = d < this.cohesionDistance
+
+      if (!birdCloseEnough) continue
+
+      neighbours++
+      avgPos.add(bird.pos)
+    }
+
+    if (neighbours > 0) {
+      avgPos.div(neighbours)
+    }
+
+    const towardsVector = p5.Vector.sub(avgPos, this.pos)
+    const avgVector = averageVectors([towardsVector, this.vel])
+
+    this.vel = avgVector
   }
 
   flock(flock) {
@@ -124,8 +144,8 @@ class Bird {
     // 2) alignment: close together birds will take on a similar direction and velocity (already implemented ish)
     // 3) cohesion: close togther birds will attempt to travel to an average position of all of them
 
-    this.separate(flock)
+    this.cohere(flock)
     this.align(flock)
-    // this.cohere(flock)
+    this.separate(flock)
   }
 }
