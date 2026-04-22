@@ -70,33 +70,48 @@ class Bird {
 
     const avgPos = createVector(0, 0)
     let neighbours = 0
-    let separated = false
 
-    if (!separated) {
-      for (let bird of flock) {
-        const d = dist(this.pos.x, this.pos.y, bird.pos.x, bird.pos.y)
-        const birdCloseEnough = d < neighbourDistance
+    for (let bird of flock) {
+      const d = dist(this.pos.x, this.pos.y, bird.pos.x, bird.pos.y)
+      const birdCloseEnough = d < neighbourDistance
 
-        if (!birdCloseEnough) continue
+      if (!birdCloseEnough) continue
 
-        neighbours++
-        avgPos.add(bird.pos)
-      }
-
-      if (neighbours > 0) {
-        avgPos.div(neighbours)
-      }
-
-      const awayVector = p5.Vector.sub(this.pos, avgPos)
-      const avgVector = averageVectors([awayVector, this.vel])
-
-      this.vel = avgVector
-      separated = true
+      neighbours++
+      avgPos.add(bird.pos)
     }
+
+    if (neighbours > 0) {
+      avgPos.div(neighbours)
+    }
+
+    const awayVector = p5.Vector.sub(this.pos, avgPos)
+    const avgVector = averageVectors([awayVector, this.vel])
+
+    this.vel = avgVector
   }
 
   align(flock) {
+    const neighbourDistance = 50
 
+    let avgDir = 0
+    let neighbours = 0
+
+    for (let bird of flock) {
+      const d = dist(this.pos.x, this.pos.y, bird.pos.x, bird.pos.y)
+      const birdCloseEnough = d < neighbourDistance
+
+      if (!birdCloseEnough) continue
+
+      neighbours++
+      avgDir += bird.vel.heading()
+    }
+
+    if (neighbours > 0) {
+      avgDir /= neighbours
+    }
+
+    this.vel.setHeading(avgDir)
   }
 
   cohere(flock) {
@@ -110,7 +125,7 @@ class Bird {
     // 3) cohesion: close togther birds will attempt to travel to an average position of all of them
 
     this.separate(flock)
-    // this.align(flock)
+    this.align(flock)
     // this.cohere(flock)
   }
 }
