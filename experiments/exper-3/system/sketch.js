@@ -68,6 +68,11 @@ class Bird {
   }
 
   flock(flock) {
+    // flocking has 3 main concepts within it
+    // 1) separation: close togther birds will steer away from each other if they are too close
+    // 2) alignment: close together birds will take on a similar direction and velocity (already implemented ish)
+    // 3) cohesion: close togther birds will attempt to travel to an average position of all of them
+
     // max angle that two birds can be meeting at and they still change direction
     // 180 = two birds will always turn if near each other
     // 0 = two birds will never turn if near each other
