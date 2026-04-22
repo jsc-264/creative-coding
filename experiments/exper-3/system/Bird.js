@@ -9,7 +9,9 @@ function averageVectors(vectors) {
 class Bird {
     constructor(x, y, size) {
         this.pos = createVector(x, y)
-        this.vel = createVector(random(-1, 1), random(-1, 1))
+        this.vel = createVector(0, 1)
+        this.vel.rotate(random(360))
+        // this.vel = p5.Vector.random2D()
         this.size = size
 
         this.speed = random(3, 5)
@@ -19,6 +21,12 @@ class Bird {
         this.separationDistance = 20
         this.cohesionDistance = 100
         this.alignmentDistance = 100
+    }
+
+    setRules(options){
+        this.separationDistance = options.separation
+        this.cohesionDistance = options.cohesion
+        this.alignmentDistance = options.alignment
     }
 
     render() {

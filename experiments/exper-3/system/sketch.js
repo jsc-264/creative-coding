@@ -5,6 +5,8 @@ let cohesionSlider
 let alignmentSlider
 let separationSlider
 
+let cohesionP, alignmentP, separationP
+
 function setup() {
   createCanvas(windowWidth*0.9, windowHeight*0.9);
   angleMode(DEGREES)
@@ -13,30 +15,41 @@ function setup() {
     flock.push(new Bird(random(width), random(height), 10))
   }
 
-  const cohesionP = createP("Cohesion")
+  cohesionP = createP("Cohesion")
   cohesionP.position(0, 0)
 
-  cohesionSlider = createSlider(10, 200, 20)
+  cohesionSlider = createSlider(0, 200, 100)
   cohesionSlider.position(0, 0)
 
-  const alignmentP = createP("Alignment")
+  alignmentP = createP("Alignment")
   alignmentP.position(200, 0)
 
-  alignmentSlider = createSlider(10, 200, 100)
+  alignmentSlider = createSlider(0, 200, 100)
   alignmentSlider.position(200, 0)
 
-  const separationP = createP("Separation")
+  separationP = createP("Separation")
   separationP.position(400, 0)
 
-  separationSlider = createSlider(10, 200, 100)
+  separationSlider = createSlider(0, 40, 20)
   separationSlider.position(400, 0)
 }
 
 function draw() {
   background(135, 206, 235);
+
+  cohesionP.html(`Cohesion ${cohesionSlider.value()}`)
+  alignmentP.html(`Alignment ${alignmentSlider.value()}`)
+  separationP.html(`Separation ${separationSlider.value()}`)
+
   flock.forEach(bird => {
+    bird.setRules({
+      cohesion: cohesionSlider.value(),
+      separation: separationSlider.value(),
+      alignment: alignmentSlider.value()
+    }
+    )
+    bird.render()
     bird.flock(flock)
     bird.update()
-    bird.render()
   })
 }
