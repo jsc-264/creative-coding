@@ -36,7 +36,6 @@ class Bird {
     this.size = size
 
     this.speed = random(5, 10)
-    this.maxSpeed = map(this.size, 5, 15, 6, 1)
 
     this.col = color(random(20, 100), random(20, 100), random(10, 15))
   }
@@ -67,12 +66,26 @@ class Bird {
     if (this.pos.y > height + this.size) this.pos.y = -this.size
   }
 
+  separate(flock) {
+    for (let bird of flock) {
+      if (bird == this) continue
+
+      let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
+      const closeEnough = d < 20
+
+      if (closeEnough) {
+        let diff = p5.Vector.sub(this.pos, bird.pos);
+        diff.setMag(this.speed)
+        diff = p5.Vector.normalize(diff)
+        this.vel.add(diff)
+      }
+    }
+  }
+
   align(flock) {
     let avgVel = createVector(0, 0)
     for (let bird of flock){
-      if (bird == this) {
-        continue
-      }
+      if (bird == this) continue
 
       let d = dist(bird.pos.x, bird.pos.y, this.pos.x, this.pos.y)
       const closeEnough = d < 20
@@ -82,6 +95,7 @@ class Bird {
       }
     }
 
+    avgVel.setMag(this.speed)
     this.vel = avgVel
   }
 
@@ -93,6 +107,6 @@ class Bird {
 
     this.separate(flock)
     this.align(flock)
-    this.cohere(flock)
+    // this.cohere(flock)
   }
 }
