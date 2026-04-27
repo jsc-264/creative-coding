@@ -11,10 +11,9 @@ class Bird {
         this.pos = createVector(x, y)
         this.vel = createVector(0, 1)
         this.vel.rotate(random(360))
-        // this.vel = p5.Vector.random2D()
         this.size = size
 
-        this.speed = random(3, 5)
+        this.speed = random(4, 5)
 
         this.col = color(random(20, 100), random(20, 100), random(10, 15))
 

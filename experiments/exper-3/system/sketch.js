@@ -8,7 +8,7 @@ let separationSlider
 let cohesionP, alignmentP, separationP
 
 function setup() {
-  createCanvas(windowWidth*0.9, windowHeight*0.9);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES)
 
   for (let i = 0; i < flockSize; i++) {
@@ -18,19 +18,19 @@ function setup() {
   cohesionP = createP("Cohesion")
   cohesionP.position(0, 0)
 
-  cohesionSlider = createSlider(0, 200, 100)
+  cohesionSlider = createSlider(1, 200, 100)
   cohesionSlider.position(0, 0)
 
   alignmentP = createP("Alignment")
   alignmentP.position(200, 0)
 
-  alignmentSlider = createSlider(0, 200, 100)
+  alignmentSlider = createSlider(1, 200, 100)
   alignmentSlider.position(200, 0)
 
   separationP = createP("Separation")
   separationP.position(400, 0)
 
-  separationSlider = createSlider(0, 40, 20)
+  separationSlider = createSlider(1, 40, 20)
   separationSlider.position(400, 0)
 }
 
