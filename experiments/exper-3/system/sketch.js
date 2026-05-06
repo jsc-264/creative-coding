@@ -6,15 +6,25 @@ function setup() {
   angleMode(DEGREES)
 
   for (let i = 0; i < flockSize; i++) {
-    flock.push(new Bird(random(width), random(height), 10))
+    flock.push(new Bird(random(width), random(height)))
   }
 }
 
 function draw() {
   background(135, 206, 235);
-  flock.forEach(bird => {
+  for (let i = flock.length - 1; i >= 0; i--){
+    const bird = flock[i]
+
     bird.flock(flock)
     bird.update()
     bird.render()
-  })
+
+    if (bird.lifespan <= 0){
+      flock.splice(i, 1)
+    }
+  }
+}
+
+function mouseDragged(){
+  flock.push(new Bird(mouseX, mouseY))
 }

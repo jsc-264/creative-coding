@@ -7,10 +7,9 @@ function averageVectors(vectors) {
 }
 
 class Bird {
-    constructor(x, y, size) {
+    constructor(x, y) {
         this.pos = createVector(x, y)
         this.vel = createVector(random(-1, 1), random(-1, 1))
-        this.size = size
 
         this.speed = random(3, 5)
 
@@ -19,6 +18,10 @@ class Bird {
         this.separationDistance = 20
         this.cohesionDistance = 100
         this.alignmentDistance = 100
+
+        
+        this.lifespan = random(200, 800)
+        this.maxLifespan = this.lifespan
     }
 
     render() {
@@ -38,6 +41,8 @@ class Bird {
     }
 
     update() {
+        this.size = map(this.lifespan, this.maxLifespan, 0, 15, 0)
+
         this.vel.setMag(this.speed)
         this.pos.add(this.vel)
 
@@ -45,6 +50,8 @@ class Bird {
         if (this.pos.x > width + this.size) this.pos.x = -this.size
         if (this.pos.y < -this.size) this.pos.y = height + this.size
         if (this.pos.y > height + this.size) this.pos.y = -this.size
+
+        this.lifespan--
     }
 
     separate(flock) {
