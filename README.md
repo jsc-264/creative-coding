@@ -8,8 +8,6 @@ For my first project, I have decided to create a replica of the album cover for 
 
 [Original Sketch](idk)
 
-[
-](idk)[Variant 2: Square Instead of Triangular Prism](idk)
-
+[Variant 2: Square Instead of Triangular Prism](idk)
 
 [Variant 3: Rainbow that Changes with Perlin Noise](idk)
