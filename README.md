@@ -1,5 +1,3 @@
-# CCO4104 Creative Coding Portfolio
-
 ## By Joe Cross (615838)
 
 ### Experiment 1: Artwork
