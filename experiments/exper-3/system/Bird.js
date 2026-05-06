@@ -19,6 +19,8 @@ class Bird {
         this.separationDistance = 20
         this.cohesionDistance = 100
         this.alignmentDistance = 100
+
+        this.lifespan = 20
     }
 
     render() {
@@ -45,6 +47,8 @@ class Bird {
         if (this.pos.x > width + this.size) this.pos.x = -this.size
         if (this.pos.y < -this.size) this.pos.y = height + this.size
         if (this.pos.y > height + this.size) this.pos.y = -this.size
+
+        this.lifespan--
     }
 
     separate(flock) {
