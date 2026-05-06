@@ -20,7 +20,7 @@ class Bird {
         this.cohesionDistance = 100
         this.alignmentDistance = 100
 
-        this.lifespan = 20
+        this.lifespan = random(200, 800)
     }
 
     render() {

@@ -12,9 +12,16 @@ function setup() {
 
 function draw() {
   background(135, 206, 235);
-  flock.forEach(bird => {
+  for (let i = flock.length - 1; i >= 0; i--){
+    const bird = flock[i]
+
     bird.flock(flock)
     bird.update()
     bird.render()
-  })
+
+    if (bird.lifespan <= 0){
+      flock.splice(i, 1)
+      print(flock.length)
+    }
+  }
 }
