@@ -26,11 +26,11 @@ My second project is a Fast Fourier Transform (FFT) algorithm audio visualiser. 
 [Variant 3: Lines Change Colour Based off Music and Mouse](https://github.com/jsc-264/CCO4104-Creative-Coding-Portfolio/blob/experiments-2-FFT-colour/experiments/exper-2/FFT/index.html)
 
 
-### Experiment 2: FFT Audio Visualiser
+### Experiment 3: Flocking Simulation
 
 ![a group of triangular birds, exhibiting flocking behaviour](images/birds.png)
 
-words here
+My last project is a recreation of a flocking algorithm created by Craig Reynolds in 1986. For the time that I have known p5js and - more specifically - Daniel Shiftman's 'coding train'. I have been interested in this flocking simulation but I have never had time or courage to try it myself; I didn't want to just copy the code, I wanted to understand and create the concepts myself and implement them without always looking at a tutorial. This Experiment allowed me to do that and understand this algorithm in a more independent way. Like my other experiments, I have 2 variations of my initial sketch. One introduces sliders into the algorithm to change the separation, alignment and cohesion of the program - which changes how each of the birds interact with each other. This variant is fun to play with and also helps me understand the importance of user input and interaction. My other variant involves each bird having its own lifespan which, as the program progresses, decreases. Each bird dies once the lifespan is too low and I have allowed the user to spawn in new birds by dragging the mouse across the canvas.
 
 [Original Sketch](experiments/exper-3/system/index.html)
 
