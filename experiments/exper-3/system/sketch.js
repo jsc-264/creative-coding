@@ -6,7 +6,7 @@ function setup() {
   angleMode(DEGREES)
 
   for (let i = 0; i < flockSize; i++) {
-    flock.push(new Bird(random(width), random(height), 10))
+    flock.push(new Bird(random(width), random(height)))
   }
 }
 
@@ -26,5 +26,5 @@ function draw() {
 }
 
 function mouseDragged(){
-  flock.push(new Bird(mouseX, mouseY, 10))
+  flock.push(new Bird(mouseX, mouseY))
 }
