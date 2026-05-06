@@ -1,4 +1,4 @@
-## By Joe Cross (615838)
+## By Joe Cross
 
 ### Experiment 1: Artwork
 
