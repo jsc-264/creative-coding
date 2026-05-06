@@ -8,6 +8,6 @@ For my first project, I have decided to create a replica of the album cover for 
 
 [Original Sketch](/experiments/exper-1/artwork/index.html)
 
-[Variant 2: Square Instead of Triangular Prism](idk)
+[Variant 2: Square Instead of Triangular Prism](https://github.com/jsc-264/CCO4104-Creative-Coding-Portfolio/blob/experminets-1-AWK-square/experiments/exper-1/artwork/index.html)
 
-[Variant 3: Rainbow that Changes with Perlin Noise](idk)
+[Variant 3: Rainbow that Changes with Perlin Noise](https://github.com/jsc-264/CCO4104-Creative-Coding-Portfolio/blob/experiments-1-AWK-colour-noise/experiments/exper-1/artwork/index.html)
