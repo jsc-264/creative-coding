@@ -17,7 +17,6 @@ For my first project, I have decided to create a replica of the album cover for 
 
 ![a group of colourful lines, in different directions, moving based off of music](images/fft.png)
 
-
 words here
 
 [Original Sketch](experiments/exper-2/FFT/index.html)
@@ -25,3 +24,16 @@ words here
 [Variant 2: The Ability to Switch what Song is Playing](https://github.com/jsc-264/CCO4104-Creative-Coding-Portfolio/blob/experiments-2-FFT-many-songs/experiments/exper-2/FFT/index.html)
 
 [Variant 3: Lines Change Colour Based off Music and Mouse](https://github.com/jsc-264/CCO4104-Creative-Coding-Portfolio/blob/experiments-2-FFT-colour/experiments/exper-2/FFT/index.html)
+
+
+### Experiment 2: FFT Audio Visualiser
+
+![a group of triangular birds, exhibiting flocking behaviour](images/birds.png)
+
+words here
+
+[Original Sketch](experiments/exper-3/system/index.html)
+
+[Variant 2: Sliders to Change the Behaviour of the Birds](https://github.com/jsc-264/CCO4104-Creative-Coding-Portfolio/blob/experiments-3-SYS-sliders/experiments/exper-3/system/index.html)
+
+[Variant 3: Each Bird has a Lifespan and the Mouse can Spawn Birds](https://github.com/jsc-264/CCO4104-Creative-Coding-Portfolio/blob/experiments-3-SYS-lifespan/experiments/exper-3/system/index.html)
