@@ -17,7 +17,7 @@ For my first project, I have decided to create a replica of the album cover for 
 
 ![a group of colourful lines, in different directions, moving based off of music](images/fft.png)
 
-words here
+My second project is a Fast Fourier Transform (FFT) algorithm audio visualiser. here, I have used the algorithm to display the frequencies of specific songs in a variety of different ways. This is the first time I have tried to use this algorithm and it highly interested me as it allowed me to manipulate music in ways that I didn't know how to before. This also has shown me how programmers are able to link different kinds of artistic media together. I have created two variants of this visualisation. One allows the user to switch between songs with the arrow keys and pause using the space bar. This allowed me to better understand using music in a more literal sense: giving me the ability to use music more efficiently i the future - especially in p5 projects. For my second variation, I looked more closely into the FFT algorithm and allowed it to change colour with respect to the volume and pitch of the track. I was able to understand how the algorithm interprets the music and how user input can drastically change the look of the visualisation.
 
 [Original Sketch](experiments/exper-2/FFT/index.html)
 
