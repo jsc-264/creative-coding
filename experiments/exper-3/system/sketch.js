@@ -21,7 +21,10 @@ function draw() {
 
     if (bird.lifespan <= 0){
       flock.splice(i, 1)
-      print(flock.length)
     }
   }
+}
+
+function mouseDragged(){
+  flock.push(new Bird(mouseX, mouseY, 10))
 }
